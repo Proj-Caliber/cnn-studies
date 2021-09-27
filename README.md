@@ -30,7 +30,9 @@
   * 총 6000장의 이미지가 문제로 제시되면, 참가팀은 이를 모두 처리하여 함
   * 복합 재질의 사물인 경우 핵심이 되는 사물만 검출
 * 제출 형식 : 추론결과를 해당 트랙별 json형식으로 제출
+
 📝 이후 업데이트되는 정보는 바로 정리하겠습니다.
+
 
 ## 기본 가이드라인
 ### Git
@@ -42,12 +44,15 @@
 * 공통
   * pull request 전, 특정 브랜치 생성과 코드 규격, 스타일 등을 포함한 모든 것을 확인할 것
   * .gitignore를 활용할 것
+
 [git 프로젝트 가이드라인 참고](https://github.com/elsewhencode/project-guidelines)
+
 📝 요청 시, 2.Oct~3.Oct까지는 git commends에 대해서도 정리하겠습니다.
 
 ### 고려 사항
 * 서버 환경에서 구동이 되어야 하기 때문에, 가상 환경 혹은 가상 머신은 상기의 서버 환경과 맞춘 뒤 코드 작성
 * 의존성을 잘 고려해서, requirements.txt와 .py 혹은 .ipynb내에 라이브러리 사용 버전에 대한 정보를 기재하기
+
 📝 코드 가이드라인 작성자 추천받습니다~
 
 ### 시간 복잡도
@@ -69,6 +74,7 @@ Trio
 user@ubuntu-18.04: git fetch https://github.com/pedropro/TACO.git
 user@ubuntu-18.04: cat readme.md
 ```
+
 📝사용 방법은 readme.md에 적혀있습니다.(영어라서 저도 지금 당장 사용법을 정리하기엔 무리가 있습니다.)
 
 ### 🚅 참고 문헌 및 Repo

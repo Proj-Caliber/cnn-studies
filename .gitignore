@@ -1,0 +1,19 @@
+_site
+.DS_Store
+
+# open source로 배포하려한다면 .python-version을 무시해야 함
+# 그러나 해당 레포지토리는 대회 준비용이기 때문에 보
+
+# 코드 fix전까지는 각자가 사용하는 requirements.txt가 다르기에 무시
+requirements.txt
+
+# 가상환경설정 방식의 차이가 있을 수 있기에 환경설정 파일 무시하도록 추가 기재
+# # poetry
+poetry.*
+pyproject.*
+
+# 관련 모델 final push(merge)전까지 무시
+tests/test_*.py
+
+# 논문 리뷰한 내용 중 구현한 코드는 merge 시에 code 보호할 방법을 찾아보겠음
+# e.g. *.py[cod]?.DS_Store

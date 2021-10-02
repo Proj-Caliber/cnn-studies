@@ -7,7 +7,6 @@
 * **OS : ubuntu 18.04**
 * **CUDA : 11.1.1**
 * **Python : 3.7.7**
-  서버 접근 방법 및 환경설정(미정) ; Jupyter
 
 ### 일정
 
@@ -103,7 +102,6 @@ user@ubuntu-18.04: cat readme.md
 ## LICENSE
 
 This work is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](https://github.com/github/choosealicense.com/blob/gh-pages/LICENSE.md).
-
 
 ![CC BY-SA 4.0](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)
 

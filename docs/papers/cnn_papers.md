@@ -1,3 +1,5 @@
+[An Overview of Convolutional Neural Networks | Papers With Code](https://paperswithcode.com/methods/category/convolutional-neural-networks)
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -147,7 +149,7 @@
       <td>2016</td>
       <td>69</td>
       <td>SqueezeNet</td>
-      <td>SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and &lt;0.5MB model size</td>
+      <td>SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size</td>
     </tr>
     <tr>
       <th>20</th>

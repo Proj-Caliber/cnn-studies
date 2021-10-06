@@ -11,3 +11,9 @@ requirements.txt
 # # poetry
 poetry.*
 pyproject.*
+
+# 관련 모델 final push(merge)전까지 무시할 예정이나 다음 push(merge)부터 주석을 해제할 것
+# tests/test_*.py
+
+# 논문 리뷰한 내용 중 구현한 코드는 merge 시에 code 보호할 방법을 찾아보겠음
+# e.g. *.py[cod]?.DS_Store?임

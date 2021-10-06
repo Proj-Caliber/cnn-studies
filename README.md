@@ -12,7 +12,7 @@
 
 | 기간  | 대회 일정                                               | 비 고                                                                                                                                                                   |
 | ----- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1주차 | 30.Sep.Thu : 대회 별 세부 문제 정의서 공지(대외비)      | `![CNN Overview](https://paperswithcode.com/methods/category/convolutional-neural-networks)`https://paperswithcode.com/methods/category/convolutional-neural-networks |
+| 1주차 | 30.Sep.Thu : 대회 별 세부 문제 정의서 공지(대외비)      | [CNN Overview](https://paperswithcode.com/methods/category/convolutional-neural-networks)|
 | 2주차 | 08.Oct.Fri : 온라인 기술워크샵 개최 및 샘플 데이터 공개 |                                                                                                                                                                         |
 | 3주차 |                                                         | ~ Customize Back-bone Network                                                                                                                                           |
 | 4주차 |                                                         |                                                                                                                                                                         |
@@ -49,14 +49,18 @@
   * pull request 전, 특정 브랜치 생성과 코드 규격, 스타일 등을 포함한 모든 것을 확인할 것
   * .gitignore를 활용할 것
 
-[git 프로젝트 가이드라인 참고](https://github.com/elsewhencode/project-guidelines)
+[git 프로젝트 가이드라인 참고_1](https://github.com/huggingface/transformers)
 
-📝 요청 시, 2.Oct~3.Oct까지는 git commends에 대해서도 정리하겠습니다.
+[git 프로젝트 가이드라인 참고_2](https://github.com/elsewhencode/project-guidelines)
+
+📝 요청 시 git commands 정리 진행하겠습니다.
 
 ### 고려 사항
 
 * 서버 환경에서 구동이 되어야 하기 때문에, 가상 환경 혹은 가상 머신은 상기의 서버 환경과 맞춘 뒤 코드 작성
 * 의존성을 잘 고려해서, requirements.txt와 .py 혹은 .ipynb내에 라이브러리 사용 버전에 대한 정보를 기재하기
+
+[project_guideline(env)](https://github.com/Proj-Caliber/Waste-Recycling-Image-Segmentation/blob/master/project_guide.md)
 
 📝 코드 가이드라인 작성자 추천받습니다~
 

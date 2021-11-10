@@ -6,6 +6,7 @@ import torch
 import GPUtil as GPU
 import humanize
 
+print(os.environ[''])
 class EnvInfos:
     def __init__(self):
         self.pid = os.getpid()                                              # port id
@@ -15,18 +16,12 @@ class EnvInfos:
         self.iGPU = self.GPUinfos()
 
     def memCheck(self):
-        '''
-        # briefly check memory infos
-        # time, mem usage
-        # 가볍게 체크할 때,,,꼭 들어가야 하는건?,,script베이스
-        '''
         print(f"""
         {'+'*50}\tmemory usage check\t{'+'*50}
         {'+'*10}\t\t\tGen RAM Free : {humanize.naturalsize(self.memory_usage_dict['free'])}\t\t||\t\tProc size : {humanize.naturalsize(self.process.memory_info().rss)}\t\t\t{'+'*10}
         {'+'*10}\t\t\tGPU NAME : {self.iGPU['GDevNM']}\t||\t\tGPU RAM Util : {self.iGPU['GUtil']}\t\t\t{'+'*10}
         {'+'*10}\t\tGPU RAM Free : {self.iGPU['GFree']}\t||\tUsed : {self.iGPU['GUsed']}\t\t||\tTotal : {self.iGPU['GTotal']}\t\t\t{'+'*10}
         {'+'*50}\t\tEnd\t\t{'+'*50}""")
-
 
     def CPUinfos(self):
         '''
@@ -67,7 +62,7 @@ class EnvInfos:
         except:
             GDevNM = "Not Connected"
         # Gresult = GPU.showUtilization()
-        return {"GDevNM" : GDevNM, "GFree" : GFree, "GUsed" : GUsed, "GUtil" : GUtil, "GTotal" : GTotal}
+        return self.cvtDICTtoDF({"GDevNM" : GDevNM, "GFree" : GFree, "GUsed" : GUsed, "GUtil" : GUtil, "GTotal" : GTotal})
     
     def cvtDICTtoDF(self, dict_object):
         cvt_units = np.array([humanize.naturalsize(val).split(' ') for val in dict_object.values()])

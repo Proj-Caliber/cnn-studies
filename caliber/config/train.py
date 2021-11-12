@@ -1,12 +1,7 @@
-import os
-import torch
-import torch.nn as nn
-# from config.annotations import *
-# from config.transform import *
-# from config import detector
+# config/train.py
+from config.train import CaliberM, CaliberOpt
+# from config.sendResult import *
+model = CaliberM()
+optimizer = CaliberOpt()
 
-class CaliberM(nn.Module):
-    def __init__(self):
-        super(CaliberM, self).__init__()
-        
-class CaliberOpt()
+# model 결과 받으면, 각 label별 cnt=1이 튜플 형식으로 쌓이게끔 작성

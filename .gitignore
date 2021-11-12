@@ -5,7 +5,8 @@ _site
 # 그러나 해당 레포지토리는 대회 준비용이기 때문에 보
 
 # 코드 fix전까지는 각자가 사용하는 requirements.txt가 다르기에 무시
-requirements.txt
+#requirements.txt
+caliber/env/*
 
 # 가상환경설정 방식의 차이가 있을 수 있기에 환경설정 파일 무시하도록 추가 기재
 # # poetry

@@ -6,7 +6,6 @@ import torch
 import GPUtil as GPU
 import humanize
 
-print(os.environ[''])
 class EnvInfos:
     def __init__(self):
         self.pid = os.getpid()                                              # port id
@@ -62,7 +61,7 @@ class EnvInfos:
         except:
             GDevNM = "Not Connected"
         # Gresult = GPU.showUtilization()
-        return self.cvtDICTtoDF({"GDevNM" : GDevNM, "GFree" : GFree, "GUsed" : GUsed, "GUtil" : GUtil, "GTotal" : GTotal})
+        return {"GDevNM" : GDevNM, "GFree" : GFree, "GUsed" : GUsed, "GUtil" : GUtil, "GTotal" : GTotal}
     
     def cvtDICTtoDF(self, dict_object):
         cvt_units = np.array([humanize.naturalsize(val).split(' ') for val in dict_object.values()])

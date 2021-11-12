@@ -1,0 +1,33 @@
+{
+    "background" : [{
+        "url" : [
+            "https://c2.staticflickr.com/4/3113/3159413238_78c04009fa_b.jpg", 
+            "https://c2.staticflickr.com/6/5535/13726757785_13d7849d4b_b.jpg", 
+            "https://c1.staticflickr.com/3/2065/2386373358_9ac0ef8a20_b.jpg", 
+            "https://c1.staticflickr.com/1/172/381170979_c4985ea83c_b.jpg", 
+            "https://c2.staticflickr.com/6/5104/5775947647_9a16dc107b_b.jpg",
+            "https://c2.staticflickr.com/6/5106/5581079470_60c6e4217d_b.jpg",
+            "https://c1.staticflickr.com/1/201/459475893_258122858a_b.jpg",
+            "https://c1.staticflickr.com/7/6144/6040850623_e516fc4699_b.jpg",
+            "https://c1.staticflickr.com/5/4067/4225652562_bdc7f53875_b.jpg",
+            "https://c1.staticflickr.com/7/6063/6041380708_e03df2627e_b.jpg",
+            "https://c2.staticflickr.com/8/7566/15433751804_a9485c69f9_b.jpg",
+            "https://c2.staticflickr.com/2/1043/1009722134_5af0b1466f_b.jpg"
+        ],
+        "feature" : [
+            "cement", 
+            "tile", 
+            "grass", 
+            ["grass", "wood"], 
+            "cement", 
+            ["cement", "waterspout"], 
+            "cement",
+            ["tile", "waterspout"],
+            "cement",
+            "cement",
+            ["cement", "waterspout"],
+            ["cement", "grass"]
+        ]
+    }]
+}
+/* 1~50까지 봄*/

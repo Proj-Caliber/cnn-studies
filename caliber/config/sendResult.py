@@ -4,9 +4,13 @@ import json
 from collections import defaultdict
 
 class SendResult:
-    def __init__(self, path=os.getcwd(),output=None):
+    def __init__(self, path=None, output=None):
         '''output==predicted model'''
-        self.path = os.path.join(path, "answersheet_4_03_Caliber.json")
+        super(SendResult, self).__init__()
+        if path != None:
+            self.path = os.path.join(path, "answersheet_4_03_youngpyoryu.json")
+        else:
+            self.path = "./answersheet_4_03_youngpyoryu.json"
         self.output = output
         self.result_form = self.Transfer()
         

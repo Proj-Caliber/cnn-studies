@@ -8,7 +8,6 @@ imageio==2.4.1
 imgaug==0.2.5
 scikit-image==0.16.2
 cupy-cuda111==9.4.0
-tensorflow==2.6.0
 tqdm==4.62.3
 albumentations==0.1.12
 opencv-contrib-python==4.1.2.30

@@ -2,7 +2,7 @@
 
 ## AI-Challenge
 
-### 서버 환경
+### <b>서버 환경</b>
 
 * **OS : ubuntu 18.04**
 * **CUDA : 11.1.1**
@@ -10,16 +10,18 @@
 
 ### 일정
 
-| 기간  | 대회 일정                                               | 비 고                                                                                                                                                                   |
-| ----- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1주차 | 30.Sep.Thu : 대회 별 세부 문제 정의서 공지(대외비)      | [CNN Overview](https://paperswithcode.com/methods/category/convolutional-neural-networks)|
-| 2주차 | 08.Oct.Fri : 온라인 기술워크샵 개최 및 샘플 데이터 공개 |                                                                                                                                                                         |
-| 3주차 |                                                         | ~ Customize Back-bone Network                                                                                                                                           |
-| 4주차 |                                                         |                                                                                                                                                                         |
-| 5주차 |                                                         |                                                                                                                                                                         |
-| 6주차 |                                                         |                                                                                                                                                                         |
-| 7주차 | 08.Nov.Mon~09.Nov.Tue : 4차 대회 사전 테스트(환경설정)  |                                                                                                                                                                         |
-| "     | 10.Nov.Wed~12.Nov.Fri : 4차 3단계 대회 개최             |                                                                                                                                                                         |
+|    <h3 align="center">기간</h3>    | <h3 align="center">대회 일정 및 진행 과정</h3> | <h3 align="center">비 고</h3> |
+| :-------------: | :-------------------- | ------: |
+|    1주차     | **<h4><bold>30.Sep.Thu</bold></h4>** : <span style="color:gray;">대회 별 세부 문제 정의서 공지(대외비)</span> | [paperswithcode :: CNN Overview](https://paperswithcode.com/methods/category/convolutional-neural-networks)</br>:tada::seedling::books::construction_worker:---:construction: |
+|    2주차     | **<h4><bold>08.Oct.Fri</bold></h4>** : 온라인 기술워크샵 개최 및 샘플 데이터 공개 | [paperswithcode :: Object Dection Models Overview](https://paperswithcode.com/methods/category/object-detection-models)</br>:construction:---:books::open_book::pencil::truck:---:construction:|| |
+|    3주차     | **<h4><bold>Paper Review</bold></h4>**[Youngpyoryu :: RCNN, Fast RCNN, Faster RCNN](https://github.com/Youngpyoryu/Waste-Recycling-Image-Segmentation/tree/master/paper-review)</br>[qkrwjdduf159 :: FPN(Feature Pyramid Network)](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/FPN(Feature%20Pyramid%20Network).ipynb)</br>[AshbeeKim :: YOLOv1](https://github.com/AshbeeKim/AshbeeKim/tree/master/Papers/YOLOv1.md) | Customizing Back-bone Network ~</br>:construction:---</br>:rocket::memo::pencil2::clipboard::pencil::construction_worker::wrench:</br>---:construction: |
+|    4주차     | **<h4><bold>Paper Review</bold></h4>**[qkrwjdduf159 :: LMM(Linear Mixed Model)](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Linear%20Mixed%20Model.ipynb)</br>[Youngpyoryu :: MMdetection]</br>[qkrwjdduf159 :: Mask RCNN](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Mask%20RCNN.ipynb)</br>[AshbeeKim :: YOLOv3] | Searching Image Sets for pre-train ~</br>:construction:---</br>:car::construction_worker::pencil2::clipboard::pencil::blue_car::construction_worker::hammer:</br>---:construction: |
+|    5주차     | **<h4><bold>Paper Review</bold></h4>**[AshbeeKim :: Cascade Mask RCNN]</br>[yunyoseob :: DL+RL: Approximation with ANN]</br>[qkrwjdduf159 :: U-Net](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/U-Net.ipynb) | :construction:---</br>:wrench::pencil2::clipboard::keyboard::building_construction::construction_worker::hammer:</br>---:construction: |
+|    6주차     | **<h4><bold>Code Review & Develop</bold></h4>**<span><i><s>[AshbeeKim :: YOLOv1v3](https://colab.research.google.com/drive/1Y4Mh9_x5YKbw2dJp0OoXRIlc3tpz-F3m?usp=sharing)</s></i></span></br><span><i>Pretrain&Tutorial</i><li>[Youngproryu](https://colab.research.google.com/drive/11qEpXYzLDsOyeVkdzb8vnfK1jdPFKCa3?usp=sharing)</li><li>[qkrwjdduf159](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Model%20tutorial%20code/%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0.ipynb)</li></span><span><i>create annotations for sample Images</i><li>[yunyoseob]</li><li>[AshbeeKim]</li></span> | [pedropro TACO](https://github.com/pedropro/TACO)</br>:bulb::card_file_box:---</br>:construction:---</br>:hammer_and_wrench::recycle::label::building_construction::bento::beers::label::keyboard::pushpin:</br>---:construction: |
+|    7주차     | **<h4><bold>08.Nov.Mon~09.Nov.Tue</bold></h4>** : 4차 대회 사전 테스트(환경설정)</br>**<h4><bold>10.Nov.Wed~12.Nov.Fri</bold></h4>** : 4차 3단계 대회 개최(변경 전) | **<h4><bold>12.Nov.Fri~</bold></h4>** : 4차 3단계 대회 재개(변경 후)</br>:construction:---</br>:whale::hammer_and_wrench::apple::penguin::heavy_plus_sign::monocle_face::whale::bug::hammer:</br>---:construction: |
+|    8주차     | **<h4><bold>13.Nov.Sun</bold></h4>** : 4차 3단계 대회 종료 (~2pm) | :passport_control::adhesive_bandage::rotating_light::test_tube:---:heavy_minus_sign::pencil: |
+
+🧐 <p style="background:gray;">현재 링크가 걸려 있지 않은 부분은 차차 정리 및 공유가 된다면 업데이트할 예정입니다.</P>
 
 ### 규정
 

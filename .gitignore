@@ -7,6 +7,7 @@ _site
 # 코드 fix전까지는 각자가 사용하는 requirements.txt가 다르기에 무시
 #requirements.txt
 caliber/env/*
+caliber/config/detector.py
 
 # 가상환경설정 방식의 차이가 있을 수 있기에 환경설정 파일 무시하도록 추가 기재
 # # poetry

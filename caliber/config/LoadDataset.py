@@ -3,7 +3,7 @@ import os
 import cv2 as cv
 import json
 import torch
-
+import pandas as pd
 class PreTrainDataset:
     def __init__(self, path=os.getcwd(), transforms=None, bbox_opt="minmax"):
         self.path = path
@@ -69,3 +69,21 @@ class PreTrainDataset:
                 codes.append(subs)
         # 언제 뭐가 필요할지 모르니까, 우선은 이렇게만 작성
         return codes
+    
+def parse_one_annot(path_to_data_file, filename):
+    data = pd.read_csv(path_to_data_file)
+    print(filename)
+    boxes_array = data[data["filename"]==filename][["xmin", "ymin", "xmax", "ymax"]].values
+    return boxes_array
+
+def getListOfFiles(dirName):
+    listOfFile = os.listdir(dirName)
+    allFiles = list()
+    for entry in listOfFile:
+        fullPath = os.path.join(dirName, entry)
+        if os.path.isdir(fullPath):
+            allFiles = allFiles + getListOfFiles(fullPath)
+        else:
+                fullPath = fullPath.replace(data_folder, '')
+                allFiles.append(fullPath)
+    return allFiles

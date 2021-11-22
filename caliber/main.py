@@ -5,6 +5,7 @@ from glob import glob as gb
 from config.sendResult import SendResult
 from config.model import CaliberM
 
+################################# 경로 확인되면 모델 작동되는 코드만 남기고 지워야 함 ###############################
 try:
     # EF = ["test_path"]
     # test_path = '/home/agc2021/dataset'

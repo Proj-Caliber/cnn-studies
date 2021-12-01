@@ -1,5 +1,8 @@
 _site
 .DS_Store
+.*
+.__*
+__pycache__
 
 # open source로 배포하려한다면 .python-version을 무시해야 함
 # 그러나 해당 레포지토리는 대회 준비용이기 때문에 보

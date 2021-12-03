@@ -5,14 +5,17 @@ _site
 __pycache__
 
 # open source로 배포하려한다면 .python-version을 무시해야 함
-# 그러나 해당 레포지토리는 대회 준비용이기 때문에 보
+# 해당 레포지토리는 대회 준비용이기 때문에 .jpg and .json 
+*.jpg
+*.jpeg
+*.json
 
 # 코드 fix전까지는 각자가 사용하는 requirements.txt가 다르기에 무시
-#requirements.txt
-caliber/env/*
-caliber/config/detector.py
+requirements.txt
 
 # 가상환경설정 방식의 차이가 있을 수 있기에 환경설정 파일 무시하도록 추가 기재
+# # pyenv
+.venv
 # # poetry
 poetry.*
 pyproject.*

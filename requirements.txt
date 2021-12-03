@@ -10,5 +10,5 @@ scikit-image==0.16.2
 cupy-cuda111==9.4.0
 tqdm==4.62.3
 albumentations==0.1.12
-opencv-contrib-python==4.1.2.30
-opencv-python==4.1.2.30
+opencv-contrib-python==4.2.0.32
+opencv-python==4.2.0.32

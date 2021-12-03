@@ -13,7 +13,8 @@
 ├── docker
 ├── docs
 │   ├── paper-review
-│   └── papers
+│   ├── papers
+│   └── tutorials
 ├── src
 │   ├── detection
 │   └── transformer
@@ -38,10 +39,94 @@
     └── annotation
 ```
 
+### ✨ Role
+
+* [YoungpyoRyu](https://github.com/Youngpyoryu)
+
+  * [U-Net++](https://paperswithcode.com/paper/unet-a-nested-u-net-architecture-for-medical)
+  * Deep Networks
+* [Ashbee Kim](https://github.com/AshbeeKim)
+
+  * [Mask-RCNN and U-net Ensembled](https://paperswithcode.com/paper/mask-rcnn-and-u-net-ensembled-for-nuclei)
+* [Park jeong yeol](https://github.com/qkrwjdduf159)
+
+  * [MMDetection](https://paperswithcode.com/paper/mmdetection-open-mmlab-detection-toolbox-and)
+  * [UNet](https://paperswithcode.com/paper/u-net-convolutional-networks-for-biomedical)
+* [Yonje Olivia Choi](https://github.com/oliviachchoi)
+
+  * [Faster R-CNN](https://paperswithcode.com/paper/faster-r-cnn-towards-real-time-object)
+  * [Mask R-CNN](https://paperswithcode.com/paper/mask-r-cnn)
+
+💬 이름을 클릭하면, 각자의 프로필을 확인할 수 있습니다.
+
+💬 If you interested in us, click name to check our profiles.
+
+
+### 📌 Rules
+
+* 대회 관련 이미지 및 json 파일은 공유가 불가능합니다.
+
+  ```
+  # .jpg, .jpeg, 그리고 .json 파일은 .gitignore에 추가했습니다.
+  # 만약 커스텀한 .json 파일을 추가하고 싶다면, 아래의 명령어로 업로드가 가능합니다.
+
+  git add {file path or name}.json -f
+  git commit
+  ```
+* master, develop에 push를 지양합니다.
+* 새로운 feature 생성 시, feature의 특징을 설명하는 이름을 branch로 생성합니다.
+
+  ```
+  # git branch로 생성하는 방법도 있지만, git checkout 사용을 권장합니다.
+
+  git checkout -b {new branch name}
+  ```
+
+### 📝 cowork을 위한 git guideline
+
+```
+# 새로운 feature를 작업할 폴더 생성 및 활성화
+> pwd
+~/{new feature workspace}
+
+# 프로젝트 repository fork or clone
+> git clone {project url}
+> cd Waste-Recycling-Image-Segmentation
+> tree -L 3 -d
+# Plastic Segmentation 동일한 폴더 구조 확인 가능(README.md 업데이트에 따라 약간의 차이가 있을 수 있음)
+
+# feature를 설명하는 내용으로 branch 생성 후 전환
+> git checkout -b {new branch name}
+
+# local로 생성한 branch, remote랑 연결
+> git push -u {remote name; (default)origin;} {new branch name}
+
+# 작업 진행하면 됨.
+
+########## 이미 생성된 branch에서 작업 시에는 굳이 반복할 필요가 없음 ##########
+# 단, 작업 시작 전을 권장함 <- troubleshooting 방지
+> git pull {remote name} {master or develop}
+
+# push 직전에는 feature에 따라 pull을 다르게 하는 방법을 권유함
+# e.g. model --> develop, documents or papers --> master
+> git pull {remote name} {master or develop}
+> git push {remote name} {new branch name}
+# 매일 현재까지 작업한 것을 최소 한번은 pull request, push 보내기
+
+# admin 권한이 없는 경우
+# feature 작성 완료 시점에서 위와 같이 push하고 master -> ashbee, develop -> 정열님로 notice
+
+# admin 권한이 있는 경우,
+# feature branch에서 작업 시
+> git push {remote name} {master or develop}
+# 각 branch와 충돌 지점 확인하고 해당 branch로 pull request 날려서 합치거나, git merge 사용
+
+```
+
 
 ## :test_tube: AI-Challenge
 
-### `<b>`서버 환경`</b>`
+### `<b>`서버 환경 `</b>`
 
 * **OS : ubuntu 18.04**
 * **CUDA : 11.1.1**
@@ -49,16 +134,16 @@
 
 ### 일정
 
-| `<h3 align="center">`기간`</h3>` | `<h3 align="center">`대회 일정 및 진행 과정`</h3>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |                                                                                                                 `<h3 align="center">`비 고`</h3>` |
-| :----------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                1주차                | **`<h4><bold>`30.Sep.Thu`</bold></h4>`** : `<span style="color:gray;">`대회 별 세부 문제 정의서 공지(대외비)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |                        [paperswithcode :: CNN Overview](https://paperswithcode.com/methods/category/convolutional-neural-networks)`</br>`🎉🌱📚👷---🚧 |
-|                2주차                | **`<h4><bold>`08.Oct.Fri`</bold></h4>`** : 온라인 기술워크샵 개최 및 샘플 데이터 공개                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |       [paperswithcode :: Object Dection Models Overview](https://paperswithcode.com/methods/category/object-detection-models)`</br>`🚧---📚📖📝🚚---🚧 |
-|                3주차                | **`<h4><bold>`Paper Review`</bold></h4>`**[Youngpyoryu :: RCNN, Fast RCNN, Faster RCNN](https://github.com/Youngpyoryu/Waste-Recycling-Image-Segmentation/tree/master/paper-review)`</br>`[qkrwjdduf159 :: FPN(Feature Pyramid Network)](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/FPN(Feature%20Pyramid%20Network).ipynb)`</br>`[AshbeeKim :: YOLOv1](https://github.com/AshbeeKim/AshbeeKim/tree/master/Papers/YOLOv1.md)                                                                                                                                                                                     |                                                                  Customizing Back-bone Network ~`</br>`🚧---`</br>`🚀📝✏️📋📝👷🔧`</br>`---🚧 |
-|                4주차                | **`<h4><bold>`Paper Review`</bold></h4>`**[qkrwjdduf159 :: LMM(Linear Mixed Model)](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Linear%20Mixed%20Model.ipynb)`</br>`[Youngpyoryu :: MMdetection]`</br>`[qkrwjdduf159 :: Mask RCNN](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Mask%20RCNN.ipynb)`</br>`[AshbeeKim :: YOLOv3]                                                                                                                                                                                                                                                                   |                                                           Searching Image Sets for pre-train ~`</br>`🚧---`</br>`🚗👷✏️📋📝🚙👷🔨`</br>`---🚧 |
-|                5주차                | **`<h4><bold>`Paper Review`</bold></h4>`**[AshbeeKim :: Cascade Mask RCNN]`</br>`[yunyoseob :: DL+RL: Approximation with ANN]`</br>`[qkrwjdduf159 :: U-Net](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/U-Net.ipynb)                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                        🚧---`</br>`🔧✏️📋⌨️🏗👷🔨`</br>`---🚧 |
-|                6주차                | **`<h4><bold>`Code Review & Develop`</bold></h4>`**`<span><i>``<s>`[AshbeeKim :: YOLOv1v3](https://colab.research.google.com/drive/1Y4Mh9_x5YKbw2dJp0OoXRIlc3tpz-F3m?usp=sharing)`</s></i>``</br><span>``<i>`Pretrain&Tutorial`</i><li>`[Youngproryu](https://colab.research.google.com/drive/11qEpXYzLDsOyeVkdzb8vnfK1jdPFKCa3?usp=sharing)`</li><li>`[qkrwjdduf159](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Model%20tutorial%20code/%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0.ipynb)`</li><span>``<i>`create annotations for sample Images`</i><li>`[yunyoseob]`</li><li>`[AshbeeKim]`</li>` |                             [pedropro TACO](https://github.com/pedropro/TACO)`</br>`💡🗃---`</br>`🚧---`</br>`🛠♻️🏷🏗🍱🍻🏷⌨️📌`</br>`---🚧 |
-|                7주차                | **`<h4><bold>`08.Nov.Mon~09.Nov.Tue`</bold></h4>`** : 4차 대회 사전 테스트(환경설정)`</br>`**`<h4><bold>`10.Nov.Wed~12.Nov.Fri`</bold></h4>`** : 4차 3단계 대회 개최(변경 전)                                                                                                                                                                                                                                                                                                                                                                                                                                 | **`<h4><bold>`12.Nov.Fri~`</bold></h4>`** : 4차 3단계 대회 재개(변경 후)`</br>`🚧---`</br>`🐳🛠🍎🐧➕:monocle_face:🐳🐛🔨`</br>`---🚧 |
-|                8주차                | **`<h4><bold>`13.Nov.Sun`</bold></h4>`** : 4차 3단계 대회 종료 (~2pm)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                              🛂:adhesive_bandage:🚨:test_tube:---➖📝 |
+| `<h3 align="center">`기간 `</h3>` | `<h3 align="center">`대회 일정 및 진행 과정 `</h3>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |                                                                                                                `<h3 align="center">`비 고 `</h3>` |
+| :-----------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                 1주차                 | **`<h4><bold>`30.Sep.Thu `</bold></h4>`** : `<span style="color:gray;">`대회 별 세부 문제 정의서 공지(대외비)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                       [paperswithcode :: CNN Overview](https://paperswithcode.com/methods/category/convolutional-neural-networks) `</br>`🎉🌱📚👷---🚧 |
+|                 2주차                 | **`<h4><bold>`08.Oct.Fri `</bold></h4>`** : 온라인 기술워크샵 개최 및 샘플 데이터 공개                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |      [paperswithcode :: Object Dection Models Overview](https://paperswithcode.com/methods/category/object-detection-models) `</br>`🚧---📚📖📝🚚---🚧 |
+|                 3주차                 | **`<h4><bold>`Paper Review `</bold></h4>`**[Youngpyoryu :: RCNN, Fast RCNN, Faster RCNN](https://github.com/Youngpyoryu/Waste-Recycling-Image-Segmentation/tree/master/paper-review) `</br>`[qkrwjdduf159 :: FPN(Feature Pyramid Network)](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/FPN(Feature%20Pyramid%20Network).ipynb)`</br>`[AshbeeKim :: YOLOv1](https://github.com/AshbeeKim/AshbeeKim/tree/master/Papers/YOLOv1.md)                                                                                                                                                                                  |                                                                  Customizing Back-bone Network ~`</br>`🚧---`</br>`🚀📝✏️📋📝👷🔧`</br>`---🚧 |
+|                 4주차                 | **`<h4><bold>`Paper Review `</bold></h4>`**[qkrwjdduf159 :: LMM(Linear Mixed Model)](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Linear%20Mixed%20Model.ipynb)`</br>`[Youngpyoryu :: MMdetection]`</br>`[qkrwjdduf159 :: Mask RCNN](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Mask%20RCNN.ipynb) `</br>`[AshbeeKim :: YOLOv3]                                                                                                                                                                                                                                                                |                                                           Searching Image Sets for pre-train ~`</br>`🚧---`</br>`🚗👷✏️📋📝🚙👷🔨`</br>`---🚧 |
+|                 5주차                 | **`<h4><bold>`Paper Review `</bold></h4>`**[AshbeeKim :: Cascade Mask RCNN]`</br>`[yunyoseob :: DL+RL: Approximation with ANN]`</br>`[qkrwjdduf159 :: U-Net](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/U-Net.ipynb)                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                        🚧---`</br>`🔧✏️📋⌨️🏗👷🔨`</br>`---🚧 |
+|                 6주차                 | **`<h4><bold>`Code Review & Develop `</bold></h4>`** `<span><i>``<s>`[AshbeeKim :: YOLOv1v3](https://colab.research.google.com/drive/1Y4Mh9_x5YKbw2dJp0OoXRIlc3tpz-F3m?usp=sharing) `</s></i>``</br><span>``<i>`Pretrain&Tutorial `</i><li>`[Youngproryu](https://colab.research.google.com/drive/11qEpXYzLDsOyeVkdzb8vnfK1jdPFKCa3?usp=sharing) `</li><li>`[qkrwjdduf159](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/Model%20tutorial%20code/%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0.ipynb) `</li><span>``<i>`create annotations for sample Images `</i><li>`[yunyoseob]`</li><li>`[AshbeeKim]`</li>` |                            [pedropro TACO](https://github.com/pedropro/TACO) `</br>`💡🗃---`</br>`🚧---`</br>`🛠♻️🏷🏗🍱🍻🏷⌨️📌`</br>`---🚧 |
+|                 7주차                 | **`<h4><bold>`08.Nov.Mon~09.Nov.Tue `</bold></h4>`** : 4차 대회 사전 테스트(환경설정)`</br>`**`<h4><bold>`10.Nov.Wed~12.Nov.Fri `</bold></h4>`** : 4차 3단계 대회 개최(변경 전)                                                                                                                                                                                                                                                                                                                                                                                                                              | **`<h4><bold>`12.Nov.Fri~`</bold></h4>`** : 4차 3단계 대회 재개(변경 후)`</br>`🚧---`</br>`🐳🛠🍎🐧➕:monocle_face:🐳🐛🔨`</br>`---🚧 |
+|                 8주차                 | **`<h4><bold>`13.Nov.Sun `</bold></h4>`** : 4차 3단계 대회 종료 (~2pm)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                              🛂:adhesive_bandage:🚨:test_tube:---➖📝 |
 
 🧐 `<p style="background:gray;">`현재 링크가 걸려 있지 않은 부분은 차차 정리 및 공유가 된다면 업데이트할 예정입니다.`</P>`
 

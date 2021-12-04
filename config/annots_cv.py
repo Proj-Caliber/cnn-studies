@@ -1,5 +1,3 @@
-import numpy as np
-
 import cv2 as cv
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -56,3 +54,7 @@ class annotCats:
                 "PINK":PINK, "ORANGE":ORANGE, "MINT":MINT, \
                 "LAVENDER":LAVENDER, "IVORY":IVORY, "SALMON":SALMON}
         return colors
+    
+# segmentation(polygon)은 따로 작성해야할 것 같음
+# class segPolygon:
+# 

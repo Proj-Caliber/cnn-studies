@@ -4,14 +4,83 @@ import cv2 as cv
 import json
 import torch
 import pandas as pd
-class PreTrainDataset:
-    def __init__(self, path=os.getcwd(), transforms=None, bbox_opt="minmax"):
-        self.path = path
+
+class CustomPath:
+    def __init__(self, path=None, ddir=None, data_opt=None, fdir=None, image_ext="jpg", annotation_ext="json", annot_path=True):
+        try:
+            self.path = os.getcwd() if path is None else path
+        except:
+            print("본인이 설치한 폴더 구조에 맞게 파일 경로를 재설정해야 합니다.")
+        self.bpath = self.basepath(ddir=ddir, data_opt=data_opt, fdir=fdir)
+        self.images = self.imagepath(extension=image_ext)
+        self.annots = self.annotpath(extension=annotation_ext, annot_path=annot_path)
+    
+    def basepath(self, ddir=None, data_opt="Train", fdir=None):
+        self.data_opt = data_opt.lower()    # train일 때 model.train()으로 받기 위함
+        if ((ddir==None)&(data_opt==None)&(fdir==None)):
+            return self.path
+        else:
+            ddir = [p for p in ddir.split('/') if p != ""]
+            data_opt = [p for p in data_opt.split('/') if p != ""]
+            
+            # 만약 클래스 폴더 별로 모델이 돌아가게 작성한다면 사용될 부분
+            if type(fdir)==str:
+                fdir = [p for p in fdir.split('/') if p != ""]
+                add_dirs = (([].extend(ddir)).extend(data_opt)).extend(fdir)
+                add_dirs = list(map(lambda x : "".join(x) if x != None else "" , add_dirs))
+                add_dirs = "/".join(add_dirs)
+                return os.path.join(self.path, add_dirs)
+            
+            # 전체 클래스를 한 tensor에 넣을 경우 사용될 부분
+            elif type(fdir)==list:
+                add_dirs = ([].extend(ddir)).extend(data_opt)
+                add_dirs = list(map(lambda x : "".join(x) if x != None, add_dirs))
+                add_dirs = "/".join(add_dirs)
+                lower_dir = os.listdir(os.path.join(self.path, add_dirs))
+                exp_initial = input(f"""\n\t요청한 디렉토리 내 존재하는 최하단 디렉토리는 다음과 같습니다.\n\t\t\t{lower_dir}\n\t\t이 중 제외할 디렐토리의 첫 번째 문자를 입력하세요. : \t""")
+                try:
+                    exp_initial = exp_initial.lower()
+                except:
+                    exp_initial = str(exp_initial)
+                bdirs = []
+                for ldir in lower_dir:
+                    if (ldir.lower()).startswith(exp_initial):
+                        pass
+                    else:
+                        bdirs.append(os.path.join(self.path, add_dirs, ldir)) if add_dirs != None else bdirs.append(os.path.join(self.path, ldir))
+                return bdirs
+            
+    def imagepath(self, extension="jpg"):
+        from glob import glob
+        if type(self.bpath)==str:
+            return list(sorted(glob(self.bpath + "/*." + extension)))
+        else:
+            img_path = []
+            for bpath in self.bpath:
+                img_path.extend(list(sorted(glob(bpath) + "/*." + extension))))
+            return img_path
+    
+    def annotpath(self, extension="json", annot_path=True):
+        from glob import glob
+        if annot_path:
+            return list(sorted(self.bpath + "/*." + extension))
+        else:
+            annot_dir = input(f"{self.bpath} 하위 경로 중 annotation 할 파일이 위치한 경로를 작성하세요. : ")
+            if annot_dir.startswith('/'):
+                annot_dir = annot_dir[1:]
+            if annot_dir.endswith('/'):
+                annot_dir = annot_dir[:-2]
+            annot_dir = os.path.join(self.bpath, annot_dir)
+            return list(sorted(annot_dir + "/*." + extension))
+class CaliberDataset(CustomPath):
+    def __init__(self, path=None, bbox_opt="minmax", transforms=None, ddir=None, data_opt=None, fdir=None, image_ext="jpg", annotation_ext="json", annot_path=True):
+        super(CaliberDataset, self).__init__(self, path=path, ddir=ddir, data_opt=data_opt, fdir=fdir, image_ext=image_ext, annotation_ext=annotation_ext, annot_path=annot_path)
+        # self.path, self.bpath, self.images, self.annots
         self.bbox_opt = bbox_opt.lower()
         self.transforms = transforms
-        self.train_path = list(sorted(os.path.join(self.path, 'assets')))
-        self.img_path = [os.path.join(self.path, 'assets', imgs) for imgs in self.train_path if imgs[:-4]==".JPG"]
-        self.wgt_path = [os.path.join(self.path, 'assets', wgts) for wgts in self.train_path if wgts[:-4]==".pth"]
+        # self.wgt_path = [os.path.join(self.path, 'assets', wgts) for wgts in self.train_path if wgts[:-4]==".pth"]
+        # 학습한 weights를 받아서 사용하는 부분은 나중에 모델할 때, 추가적으로 작성
+        # 
         self.imgs, self.targets = self.cvtImageAnnots()
         
     def __getitem__(self, idx):
@@ -26,14 +95,13 @@ class PreTrainDataset:
     
     def cvtImageAnnots(self):
         imgs = []
-        for path in self.img_path:
+        for path in self.images:
             img = cv.imread(path)
             img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
             imgs.append(img)
         imgs = torch.stack(imgs)
         
-        ann_path = str([os.path.join(self.path, 'assets', ann) for ann in self.train_path if ann[:-4]=="json"])
-        with open(ann_path, 'r') as jsf:
+        with open(self.annots, 'r') as jsf:
             ann_data = json.loads(jsf.read())   # ['fname', 'backgroud', 'label', 'bbox_minmax', 'bbox_minWH', 'bbox_centerWH'] : 'background'는 나중에 활용하기.
         targets = {}
         targets['image_id'] = torch.stack([torch.tensor([idx]) for idx in range(len(ann_data['fname']))])

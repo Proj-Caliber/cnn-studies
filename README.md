@@ -42,18 +42,14 @@
 ### ✨ Role
 
 * [YoungpyoRyu](https://github.com/Youngpyoryu)
-
   * [U-Net++](https://paperswithcode.com/paper/unet-a-nested-u-net-architecture-for-medical)
-  * Deep Networks
+  * [Deep-Net](https://paperswithcode.com/paper/semantic-image-segmentation-with-deep)
 * [Ashbee Kim](https://github.com/AshbeeKim)
-
   * [Mask-RCNN and U-net Ensembled](https://paperswithcode.com/paper/mask-rcnn-and-u-net-ensembled-for-nuclei)
 * [Park jeong yeol](https://github.com/qkrwjdduf159)
-
-  * [MMDetection](https://paperswithcode.com/paper/mmdetection-open-mmlab-detection-toolbox-and)
   * [UNet](https://paperswithcode.com/paper/u-net-convolutional-networks-for-biomedical)
+  * [~~MMDetection~~](https://paperswithcode.com/paper/mmdetection-open-mmlab-detection-toolbox-and)
 * [Yonje Olivia Choi](https://github.com/oliviachchoi)
-
   * [Faster R-CNN](https://paperswithcode.com/paper/faster-r-cnn-towards-real-time-object)
   * [Mask R-CNN](https://paperswithcode.com/paper/mask-r-cnn)
 
@@ -134,8 +130,8 @@
 
 ### 일정
 
-| `<h3 align="center">`기간 `</h3>` | `<h3 align="center">`대회 일정 및 진행 과정 `</h3>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |                                                                                                                `<h3 align="center">`비 고 `</h3>` |
-| :-----------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <h3 align="center">기간</h3> | <h3 align="center">`대회 일정 및 진행 과정</h3> |  <h3 align="center"> 비 고 </h3> |
+| :-------------------------------------: | :---------------------------------------------------- | ------------------: |
 |                 1주차                 | **`<h4><bold>`30.Sep.Thu `</bold></h4>`** : `<span style="color:gray;">`대회 별 세부 문제 정의서 공지(대외비)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                       [paperswithcode :: CNN Overview](https://paperswithcode.com/methods/category/convolutional-neural-networks) `</br>`🎉🌱📚👷---🚧 |
 |                 2주차                 | **`<h4><bold>`08.Oct.Fri `</bold></h4>`** : 온라인 기술워크샵 개최 및 샘플 데이터 공개                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |      [paperswithcode :: Object Dection Models Overview](https://paperswithcode.com/methods/category/object-detection-models) `</br>`🚧---📚📖📝🚚---🚧 |
 |                 3주차                 | **`<h4><bold>`Paper Review `</bold></h4>`**[Youngpyoryu :: RCNN, Fast RCNN, Faster RCNN](https://github.com/Youngpyoryu/Waste-Recycling-Image-Segmentation/tree/master/paper-review) `</br>`[qkrwjdduf159 :: FPN(Feature Pyramid Network)](https://github.com/qkrwjdduf159/Model-tutorial/blob/main/FPN(Feature%20Pyramid%20Network).ipynb)`</br>`[AshbeeKim :: YOLOv1](https://github.com/AshbeeKim/AshbeeKim/tree/master/Papers/YOLOv1.md)                                                                                                                                                                                  |                                                                  Customizing Back-bone Network ~`</br>`🚧---`</br>`🚀📝✏️📋📝👷🔧`</br>`---🚧 |

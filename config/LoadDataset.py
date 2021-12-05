@@ -72,6 +72,18 @@ class CustomPath:
                 annot_dir = annot_dir[:-2]
             annot_dir = os.path.join(self.bpath, annot_dir)
             return list(sorted(annot_dir + "/*." + extension))
+
+class plasticDF:
+    '''
+    항수 다시 만들기 너무 귀찮지만, 대회에서 너~~~~~~~~무 데이터도 경로도 잘 줘서...
+    우선 원래 load하는 부분은 차차 수정할테지만, 급하게 사용해야해서 만듦
+    '''
+    def __init__(self, data=None):
+        self.DF_info = data
+    ############### 내일 일 끝내고 다시 작성하기 #################
+    
+        
+
 class CaliberDataset(CustomPath):
     def __init__(self, path=None, bbox_opt="minmax", transforms=None, ddir=None, data_opt=None, fdir=None, image_ext="jpg", annotation_ext="json", annot_path=True):
         super(CaliberDataset, self).__init__(self, path=path, ddir=ddir, data_opt=data_opt, fdir=fdir, image_ext=image_ext, annotation_ext=annotation_ext, annot_path=annot_path)

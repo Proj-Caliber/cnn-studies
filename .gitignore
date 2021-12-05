@@ -16,12 +16,16 @@ requirements.txt
 # 가상환경설정 방식의 차이가 있을 수 있기에 환경설정 파일 무시하도록 추가 기재
 # # pyenv
 .venv
+.python-version
 # # poetry
 poetry.*
 pyproject.*
 
 # 관련 모델 final push(merge)전까지 무시할 예정이나 다음 push(merge)부터 주석을 해제할 것
 # tests/test_*.py
+
+# 대회 이후 필요 시 정리
+github-project.md
 
 # 논문 리뷰한 내용 중 구현한 코드는 merge 시에 code 보호할 방법을 찾아보겠음
 # e.g. *.py[cod]?.DS_Store?임

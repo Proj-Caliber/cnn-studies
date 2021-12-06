@@ -111,4 +111,3 @@ class segPolygon(annotCats):
     def __len__(self):
         print(f"현재 이미지 내 object의 수 : {len(self.obj_points)}")
         return len(self.obj_points)
-        

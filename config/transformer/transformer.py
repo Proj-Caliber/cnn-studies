@@ -1,13 +1,13 @@
 import cv2 as cv
-import torchvision.transform as T
+import torchvision.transforms as T
 # import albumentation as A
 
 def get_T(transform=None):
-    transforms = []
-    transforms.append(T.ToTensor())
+    transform = []
+    transform.append(T.ToTensor())
     
     if transform:
-        transforms.append(T.RandomHoriziontalFlip(0.5))
+        transform.append(T.RandomHoriziontalFlip(0.5))
     return T.Compose(transform)
 
 ### 대회엔 transform까지만 사용이 가능할 듯

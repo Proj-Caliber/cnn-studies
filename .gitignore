@@ -25,3 +25,14 @@ pyproject.*
 
 # 논문 리뷰한 내용 중 구현한 코드는 merge 시에 code 보호할 방법을 찾아보겠음
 # e.g. *.py[cod]?.DS_Store?임
+
+# baseline에서 사용되지 않는 내용
+docker/*
+assets/data/*
+assets/taco/*
+code*/*
+docs/paper-review/*
+docs/papers/*
+github-project.md
+main.py
+project-guide.md

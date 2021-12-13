@@ -44,8 +44,7 @@ docs/paper-review/*
 # 사용 시 추가 가능
 docs/papers/*
 
-# 정열님 진행 완료 코드
-code\ store/이미지\ 적재하기.ipynb
-
-# AshbeeKim 진행 완료 코드
-docs/tutorials/plastic_baseline.ipynb
+# 
+config
+config_org/*
+docs_org/*

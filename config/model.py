@@ -1,10 +1,10 @@
 import os
 import torch
 import torch.nn as nn
-from torch.vision.reference.detection.engine import train_one_epoch, evaluate
-from config.detection.pretrained import get_finetuned_model
-from config.detection.backbone import add_different_backbone
-from config.detection.detector import resnet50_fpn
+from config.engine import train_one_epoch, evaluate
+from config.pretrained import get_finetuned_model
+from config.backbone import add_different_backbone
+from config.detector import resnet50_fpn
 
 class CaliberM(nn.Module):
     def __init__(self, device=device, extension='pt', num_classes=2, option=None):

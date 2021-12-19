@@ -1,22 +1,51 @@
 # Waste Recycling Image Segmentation
 
 
-## 🥼 자율연구 - Plastic Segmentation
+## 🥼 자율연구 - CNN(Plastic Segmentation)
 
+### 👷 Rebuilders
+* AI-Challenge ([Ashbee Kim](https://github.com/AshbeeKim))
+* Plastics Segmentation ([Park jeong yeol](https://github.com/qkrwjdduf159))
+
+
+### 📋 Guidelines
+```
+# 우선 작업을 진행할 폴더 생성
+$ mkdir <feature name>
+$ cd <feature name>
+
+# 방법 1 : organization에서 바로 작업
+$ git init
+    # 만약 git init을 했을 때, 로컬 브랜치 명이 main, master라면
+    $ git branch --move main(or master) <feature branch name>
+$ git remote add origin git@github.com:Proj-Caliber/Waste-Recycling-Image-Segmentation.git
+    # 만약 remote name을 origin이 아닌 다른 명칭으로 하고 싶다면
+    $ git remote rename origin <new name>
+$ git pull origin <remote branch name>
+$ git push -u origin <remote branch name>
+```
+이후 진행한 작업은 commit 하고 $ git push origin <remote branch name>
+
+작업이 전부 끝나면, develop 브랜치로 pull request 날리기
+    
+</br>
+
+### 🐋 권장 서버 환경
+
+* **OS : ubuntu 18.04**
+* **CUDA : 11.1.1**
+* **Python : ^3.7.7**
+
+
+### 🏗️ 구조
 ```
 .
 ├── assets
 │   ├── data
-│   │   ├── test
-│   │   │   ├── annotations
-│   │   │   └── image
-│   │   └── train
-│   │       ├── annotation
-│   │       └── image
-│   └── mask
-│       ├── test
-│       └── train
-├── config
+│   ├── ...
+│   ├── mask
+│   └── weights
+├── models
 │   ├── detection
 │   ├── segmentation
 │   └── transformer
@@ -26,9 +55,11 @@
     └── tutorials
 ```
 
-### 데이터 접근 경로
 
+### 데이터 접근 경로
+* case2
 ```
+# 🧐 plastics segmentation
 ./assets/data
 ├── test
 │   ├── annotations
@@ -55,8 +86,6 @@
 ```
 
 
-
-
 ### ✨ 참고 문헌 및 Repo by Roles
 
 * [YoungpyoRyu](https://github.com/Youngpyoryu)
@@ -77,28 +106,6 @@
 
 💬 If you interested in us, click name to check our profiles.
 
-
-### 📌 Rules
-
-* 대회 관련 이미지 및 json 파일은 공유가 불가능합니다.
-
-  ```
-  # .jpg, .jpeg, 그리고 .json 파일은 .gitignore에 추가했습니다.
-  # 만약 커스텀한 .json 파일을 추가하고 싶다면, 아래의 명령어로 업로드가 가능합니다.
-
-  git add {file path or name}.json -f
-  git commit
-  ```
-* master, develop에 push를 지양합니다.
-* 새로운 feature 생성 시, feature의 특징을 설명하는 이름을 branch로 생성합니다.
-
-  ```
-  # git branch로 생성하는 방법도 있지만, git checkout 사용을 권장합니다.
-
-  git checkout -b {new branch name}
-  ```
-
-💡 대회 내 데이터 접근 경로 변경으로 인해, 내부 구조 수정했습니다.
 
 ---
 

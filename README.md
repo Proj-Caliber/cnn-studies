@@ -6,7 +6,6 @@
 * AI-Challenge ([Ashbee Kim](https://github.com/AshbeeKim))
 * Plastics Segmentation ([Park jeong yeol](https://github.com/qkrwjdduf159))
 
-</br>
 
 ### 📋 Guidelines
 ```
@@ -34,7 +33,7 @@ $ git push -u origin <remote branch name>
 
 * **OS : ubuntu 18.04**
 * **CUDA : 11.1.1**
-* **Python : 3.7.7^**
+* **Python : ^3.7.7**
 
 
 ### 🏗️ 구조

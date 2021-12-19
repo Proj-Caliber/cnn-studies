@@ -23,7 +23,7 @@
 │   ├── ...
 │   ├── mask
 │   └── weights
-├── config
+├── models
 │   ├── detection
 │   ├── segmentation
 │   └── transformer

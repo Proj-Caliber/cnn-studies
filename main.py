@@ -1,22 +1,19 @@
 # -*- python-mode -*-
 # -*- coding: utf-8 -*-
 import os
-import sys
 import argparse
 import torch
 
-os.environ["NUM_CLASSES"]
 # print(NUM_CLASSES)
 # try:
 # EF = ['parser']
 # 1~main.py까지 다 작성 시, 걸리는 구간 확인용으로 assert
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--epoch', type=int, default=5, help='')
-# parser.add_argument('--batch', type=int, default=1, help='') 
-# args = parser.parse_args()
+parser = argparse.ArgumentParser(description='model params')
+parser.add_argument('--epoch', type=int, default=5, help='')
+parser.add_argument('--batch', type=int, default=1, help='') 
+args = parser.parse_args()
 # parser.add_argument('--lr', type=, default=, help='') 
 # data_type? case?가 어떠한가, epoch, batch_size, 
-# model -> num_classes, option:init/update/inference, pretrained weight가 있는가.(extension:pt, pth)
 # argparse로 처리할 부분과 shell script config로 진행할 부분 고려해보기
 
 # EF.append('device')
@@ -36,7 +33,9 @@ ROOT = "/"
 from glob import glob as gb
 '''
 
-#     model = CaliberM()
+# model = CaliberM()
+# model -> num_classes, option:init/update/inference, pretrained weight가 있는가.(extension:pt, pth)
+num_classes = os.environ["NUM_CLASSES"]
 
 '''
 2. 모델(단순 detection, detect+segs, transforms(+ augmentation)

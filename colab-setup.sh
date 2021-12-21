@@ -16,8 +16,8 @@ apt-get install libcupti-dev
 apt-get update
 rm -rf cudnn
 
-echo 'export PATH="$PATH:/usr/local/cuda-11.1/bin"' >> ~/.bashrc
-echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.1/lib64"' >> ~/.bashrc
+echo 'export PATH="$PATH:/usr/local/cuda/bin"' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"' >> ~/.bashrc
 
 # 일단 이렇게 해보고 너무 구조가 정리가 되지 않은 상태이거나, 오작동 시 최상위에 프로젝트 폴더 생성하는 것으로 바꾸기
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
@@ -26,9 +26,10 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 echo 'export PATH="$HOME/.poetry/bin:$PATH"' >> ~/.bashrc
 source $HOME/.poetry/env
 poetry completions bash > /etc/bash_completion.d/poetry.bash-completion
+source $HOME/.bashrc
 
-mkdir ai-challenge
-cd ai-challenge
+# mkdir ai-challenge
+# cd ai-challenge
 
 # 모듈 전체 정리가 된다면???
 # poetry new ai-challenge

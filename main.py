@@ -10,11 +10,10 @@ import collections
 parser = argparse.ArgumentParser(description='model params')
 parser.add_argument('--mode', type=str, default='init', help="'init', 'update' or 'inference'")
 parser.add_argument('--epoch', type=int, default=5, help='')
-parser.add_argument('--batch', type=int, default=1, help='') 
-# parser.add_argument('--lr', type=, default=, help='') 
+parser.add_argument('--batch', type=int, default=1, help='')
+# 현재 수준에로는 lr_scheduler로 lr, momentum을 맞추는 것보다 임의 지정을 한 뒤, 나중에 수정하는 방향으로
+# parser.add_argument('--lr-scheduler', type=float, default=, help='')
 args = parser.parse_args()
-# data_type? case?가 어떠한가, epoch, batch_size, 
-# argparse로 처리할 부분과 shell script config로 진행할 부분 고려해보기
 
 # EF.append('device')
 # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -29,7 +28,7 @@ args = parser.parse_args()
 # model -> num_classes, option:init/update/inference, pretrained weight가 있는가.(extension:pt, pth)
 # num_classes = 5
 # num_classes = os.environ["NUM_CLASSES"]   # dockerfile 셋업 끝나면 주석 해제
-
+# 사용 모델에 따라 normalization이 다를 수 있음 -> transformer?? 그럼 기본은 데이터 로드는 tensor? or PIL?
 
 #     EF.append("sendResult")
 #     SendResult().FIN()

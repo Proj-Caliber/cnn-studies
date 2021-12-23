@@ -18,7 +18,7 @@ def add_different_backbone():
                                                     output_size=7,
                                                     sampling_ratio=2)
     model = FasterRCNN(backbone,
-                       num_classes=8,
+                       num_classes=NUM_CLASSES,
                        rpn_anchor_generator=anchor_generator,
                        box_roi_pool=roi_pooler)
     return model

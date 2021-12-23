@@ -6,7 +6,7 @@ from torchvision.models.detection.mask_rcnn import MaskRCNNPredictor
 
 
 # 7 class + background
-def get_finetuned_model(model=None, num_classes=2, pre_path=None, weight_path=None, mask=False):
+def get_finetuned_model(model=None, num_classes=NUM_CLASSES, pre_path=None, weight_path=None, mask=False):
     if model:
         if weight_path:
             model.load_state_dict(torch.load(weight_path))

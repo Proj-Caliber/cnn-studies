@@ -7,7 +7,7 @@ from torch import Tensor
 import torchvision
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-def resnet50_fpn(device=None, num_classes=2, save_opt=None):
+def resnet50_fpn(device=None, num_classes=NUM_CLASSES, save_opt=None):
     model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
     num_classes = num_classes
     in_features = model.roi_heads.box_predictor.cls_score.in_features   # 1024

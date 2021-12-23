@@ -92,19 +92,12 @@ if (__name__ == '__main__') or (__name__ == 'config.dataset'):
             image = img
             import torchvision.transforms as T
             m, s = np.mean(image, axis = (0, 1)), np.std(image, axis = (0, 1))        
-            if self.mode == 'train':
-                transform = T.Compose([
-                                    T.ToTensor(),
-                                    T.Normalize(mean = m, std = s),
-                ])
+            transform = T.Compose([
+                                T.ToTensor(),
+                                T.Normalize(mean = m, std = s),
+            ])
                 image = transform(image)
-            else:
-                transform = T.Compose([
-                                    T.Resize(256),
-                                    T.ToTensor(),
-                                    T.Normalize(mean = m, std = s),
-                ])
-                image = transform(image)
+            
             return image
         
         def json2annots(self, annot_path, idx, mask=None):

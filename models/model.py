@@ -1,19 +1,18 @@
-import os
-import torch
+# models.model.py
 import torch.nn as nn
-from config.engine import train_one_epoch, evaluate
-from config.pretrained import get_finetuned_model
-from config.backbone import add_different_backbone
-from config.detector import resnet50_fpn
+from PTV.detection.engine import train_one_epoch, evaluate
+from detection.pretrained import get_finetuned_model
+from detection.backbone import add_different_backbone
+from detection.detector import resnet50_fpn
 
 class CaliberM(nn.Module):
-    def __init__(self, device=device, extension='pt', num_classes=2, option=None):
+    def __init__(self, device=None, num_classes=2, mode=None):
         super().__init__()
-        self.pretrained_path = os.path.join(os.getcwd(), f"assets/taco/model.{extension}")
+        self.pretrained_path = "weights"
         self.device = device
         self.num_classes = num_classes
-        self.extension = extension
-        if option:  # train
+
+        if mode:  # train
             self.model = get_finetuned_model(self.num_classes)
             self.model = self.Train()
         else:   # inference

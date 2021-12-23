@@ -1,5 +1,4 @@
-# config.sendResult.py
-import os
+# models.sendResult.py
 import json
 from collections import defaultdict
 

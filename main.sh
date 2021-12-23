@@ -11,6 +11,10 @@ WEIGHT_DECAY = 0.0005
 
 # export STEP=5 # lr_scheduler 구성 완료 시 주석해제
 
+cd models
+bash vision.sh
+cd ../
+
 # init
 python main.py
 python main.py --mode update --epoch 3 --batch 5

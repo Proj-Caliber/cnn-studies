@@ -8,7 +8,7 @@ from torch.utils import data
 if (__name__ == '__main__') or (__name__ == 'config.CaliberDataset'):
     import os
     print(__name__)
-    from torch.utils.data import Dataset
+    from torch.utils.data import Dataset6
     def instanceMask(mask, segmentation):
         mask = mask.copy()
         pts = np.array(segmentation, dtype = np.uint8).reshape(-1, 2)

@@ -3,6 +3,7 @@ import json
 import cv2 as cv
 from glob import glob
 from tqdm import tqdm
+import torch
 '''
 vision부분과 engine부분을 어떻게 진행해야 할까?
 '''
@@ -18,7 +19,7 @@ if __name__ == '__main__':
     # from config.TVS.detection import coco_utils as coco_utils
 
     # from config.TVS.detection import transforms as transforms
-    from config.dataset import CustomDataset
+    from config.dataset1 import CustomDataset
     print("done!")
 
     # from config.detection import 

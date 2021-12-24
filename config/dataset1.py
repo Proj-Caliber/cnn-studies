@@ -21,8 +21,8 @@ __all__ = [
 # 그런데 이 부분이 폐플라스틱 객체검출 데이터에 관해서 작성했지만 오픈소스로는 부족하다고 생각이 된다.
 # 그래서 이 부분은 어떻게 진행할지 얘기해 봐야겠다.
 if (__name__ == '__main__') or (__name__ == 'config.dataset'):
-    class CustomDataset(torch.utils.data.Dataset):
-        def __init__(self, root, transforms):
+    class CustomDataset(Dataset):
+        def __init__(self, root, transforms = None):
             self.root = root
             self.transforms = transforms
             mode = self.root.split('/')[-1]
@@ -102,7 +102,7 @@ if (__name__ == '__main__') or (__name__ == 'config.dataset'):
                             
                     polygon_xy = np.array([(x, y) for (x,y) in zip(all_points_x, all_points_y)])
                     
-                    cv2.fillpoly(masked_image, np.uint([polygon_xy]), i+1)
+                    cv.fillpoly(masked_image, np.uint([polygon_xy]), i+1)
                     
                     boxes.append([xmin, ymin, xmax, ymax])
                     labels.append(label)
@@ -138,6 +138,11 @@ if (__name__ == '__main__') or (__name__ == 'config.dataset'):
                 img_path = self.image[idx]
                 annot_path = self.annot[idx]
                 
+                with open(annot_path, 'r') as f:
+                    annot = json.loads(f.read())
+                    
+                annot = annot['annotations']
+
                 target = {}
                 
                 img = Image.open(img_path).convert('RGB')

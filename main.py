@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     # from config.TVS.detection import transforms as transforms
     # from config.dataset import *
-    from CaliberDataset import CustomDataset
+    from config.CaliberDataset import CustomDataset
     print("done!")
 
     # from config.detection import 

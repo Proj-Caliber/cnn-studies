@@ -1,5 +1,7 @@
-__version__ = '0.0.1'
-__name__ = 'transformer'
+if __name__ == "__main__":
+    import ..PTV.detection.utils
+    improt ..PTV.detection.transforms
+
 __all__ = [
     'transformer'
 ]

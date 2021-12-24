@@ -1,5 +1,7 @@
-__version__ = '0.0.1'
-__name__ = 'detection'
+if __name__ == "__main__":
+    import torchvision
+    import torch.nn as nn
+    
 __all__ = [
     'backbone',
     'detector',

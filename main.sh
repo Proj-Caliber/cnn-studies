@@ -13,7 +13,6 @@ WEIGHT_DECAY = 0.0005
 
 cd models
 bash vision.sh
-cd ../
 
 # init
 python main.py

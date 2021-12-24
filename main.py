@@ -6,7 +6,7 @@ import torch
 import collections
 # print(os.path.abspath(os.path.dirname(__file__)))
 # # /Volumes/GitHub/organization-caliber/recycle_image_project/after_plastic/ai-challenge
-parser = argparse.ArgumentParser(description='model params')
+parser = argparse.ArgumentParser(prog='caliber', description='model params', argument_default=argparse.SUPPRESS)
 parser.add_argument('--mode', type=str, default='init', help="'init', 'update' or 'inference'")
 parser.add_argument('--epoch', type=int, default=5, help='')
 parser.add_argument('--batch', type=int, default=1, help='')
@@ -24,29 +24,21 @@ if __name__ == "__main__":
     # parallel가능 여부에 따라, logic은 달라야 함.
     # 현재 모델은 Multi-GPU에 대한 고려없이 작성한 코드임.
 
-    base_dir = "/content/drive/MyDrive/Task/plastic-segmentation/Data"
-    num_classes = 5
-    momentum = 0.9
-    learning_rate = 0.001
-    step_size = 5
-    # dockerfile 셋업 끝나면 하단의 주석 해제 후 상기의 config 제거
-    weight_decay = 0.0005
-    gamma = 0.1
-    # base_dir = os.environ["BASE_DIR"]
-    # num_classes = os.environ["NUM_CLASSES"]   
-    # lr_scheduler = os.environ["LR_SCHEDULER"] # 해당 부분 코드를 제대로 작성한 경우 사용, 아니면 위의 값 사용.
-    # step = os.environ["STEP"]
-
+    os.environ["ROOT"] = os.getcwd()
+    root = os.environ["ROOT"]
+    
     # Data Pipelines
     from models.dataset.CaliberDataset import CustomDataset
     if args.mode == 'inference':
         # 이 부분을 통상 test로 하는 것으로 아는데.....
-        dataset = CustomDataset()
+        test_dataset = CustomDataset()
     else:   # train(data >> train, validation, test)
         # {base_dir}/train
-        dataset = CustomDataset()
+        dataset = CustomDataset(root = os.path.join(root, 'assets'))
         # {base_dir}/test
-        test_dataset = CustomDataset() 
+        test_dataset = CustomDataset()
+        
+        
     
     # Model Pipelines
     from models.model import CaliberM

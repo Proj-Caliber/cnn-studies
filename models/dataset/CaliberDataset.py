@@ -1,8 +1,11 @@
-import cv2 as cv
+# models.dataset.CaliberDataset.py
 from torch.utils.data import Dataset
+from torchvision import transforms
+# from PTV.detection import transforms as T
 
 # 원래 데이터 intance마다
 def random_colour_masks(image):
+    # ramdom하게 마스크에 색상값 부여할 때 활용할 함수
     colours = [[0, 255, 0],[0, 0, 255],[255, 0, 0],[0, 255, 255],[255, 255, 0],[255, 0, 255],[80, 70, 180],[250, 80, 190],[245, 145, 50],[70, 150, 250],[50, 190, 190]]
     r = np.zeros_like(image).astype(np.uint8)
     g = np.zeros_like(image).astype(np.uint8)
@@ -20,18 +23,13 @@ def instanceMask(mask, segmentation):
     cv.fillPoly(mask, pts, color=(255, 255, 255))
     return mask
 
-
-
 class CustomDataset(Dataset):
-    def __init__(self, root, transforms = None, target_transforms = None, mode = 'train'):
+    def __init__(self, root, mode=args.mode, transforms = None):
         self.root = root
         self.transforms = transforms
-        self.target_transforms = target_transforms
         self.mode = mode.lower()
         self.infos = self.baseInfos()
         self.imgs, self.annots = self.infos['image_path'], self.infos['annot_path']
-        # if self.mode == 'train':
-        #     self.imgs, self.masks = blahblah
         self.masks = None
 
     def __getitem__(self, idx=None):
@@ -132,7 +130,7 @@ class CustomDataset(Dataset):
             target = {"boxes" : [], "labels" : [], "masks" : [], "image_id" : [], "area" : [], "iscrowd" : []}
 
             # bbox ground bbox
-            gxmin, gymin, gxmax, gymax = 0, 0, 0, 0
+            # gxmin, gymin, gxmax, gymax = 0, 0, 0, 0
             for i in range(n_objects):
                 bbox = annot['annotations'][i]['bbox']
                 xmin, ymin, width, height = bbox[0],bbox[1],bbox[2],bbox[3]

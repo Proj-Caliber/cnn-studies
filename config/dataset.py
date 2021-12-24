@@ -63,7 +63,7 @@ if (__name__ == '__main__') or (__name__ == 'config.dataset'):
 
         def baseInfos(self):
             baseinfos = {"label" : [], "metainfo_id" : [], "feature" : [], "image_path" : [], "annot_path": []}
-            if self.mode == "val":
+            if self.mode == "train":
                 bpath = os.path.join(self.root, "train")
             else:
                 bpath = os.path.join(self.root, self.mode)
@@ -96,7 +96,7 @@ if (__name__ == '__main__') or (__name__ == 'config.dataset'):
                                 T.ToTensor(),
                                 T.Normalize(mean = m, std = s),
             ])
-                image = transform(image)
+            image = transform(image)
             
             return image
         

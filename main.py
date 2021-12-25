@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser(prog='caliber', description='model params', arg
 parser.add_argument('--mode', type=str, default='init', help="'init', 'update' or 'inference'")
 parser.add_argument('--epoch', type=int, default=5, help='')
 parser.add_argument('--batch', type=int, default=1, help='')
+parser.add_argument('--save-dir', type=str, default='assets/weights', help='')
 # 현재 수준에로는 lr_scheduler로 lr, momentum을 맞추는 것보다 임의 지정을 한 뒤, 나중에 수정하는 방향으로
 # parser.add_argument('--lr-scheduler', type=float, default=, help='')
 args = parser.parse_args()
@@ -21,23 +22,26 @@ except AssertionError:
 
 if __name__ == "__main__":
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    # parallel가능 여부에 따라, logic은 달라야 함.
-    # 현재 모델은 Multi-GPU에 대한 고려없이 작성한 코드임.
+    # parallel가능 여부에 따라, logic은 달라야 함. 현재 모델은 Multi-GPU에 대한 고려없이 작성한 코드임.
 
-    os.environ["ROOT"] = os.getcwd()
-    root = os.environ["ROOT"]
-    
     # Data Pipelines
     from models.dataset.CaliberDataset import CustomDataset
     if args.mode == 'inference':
-        # 이 부분을 통상 test로 하는 것으로 아는데.....
-        test_dataset = CustomDataset()
+        # inference가 이미지 하나일 경우와 폴더일 경우를 고려하고 함수 수정해야할 듯
+        test_dataset = CustomDataset(root = os.path.join(os.environ["WORKSPACE"], 'assets/data/inference'), mode = args.mode)
     else:   # train(data >> train, validation, test)
         # {base_dir}/train
-        dataset = CustomDataset(root = os.path.join(root, 'assets'))
+        dataset = CustomDataset(root = os.path.join(os.environ["WORKSPACE"], 'assets/data/train'), mode = args.mode)
         # {base_dir}/test
-        test_dataset = CustomDataset()
+        test_dataset = CustomDataset(root = os.path.join(os.environ["WORKSPACE"], 'assets/data/test'), mode = args.mode)
         
+        torch.manual_seed(777)
+        indices = torch.randperm(len(dataset)).tolist()
+        
+        train_dataset = torch.utils.data.Subset(dataset, indices[:-((dataset.__len__)-(test_dataset.__len__))])
+        valid_dataset = torch.utils.data.Subset(dataset, indices[-((dataset.__len__)-(test_dataset.__len__)):])
+    
+    # 오늘 Data Pipelines
         
     
     # Model Pipelines

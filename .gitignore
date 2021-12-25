@@ -21,6 +21,9 @@ poetry.*
 pyproject.*
 
 assets/weights/*.pth
+# pytorch/vision/references/detection
+models/PTV/*
+
 README.md
 # 논문 리뷰한 내용 중 구현한 코드는 merge 시에 code 보호할 방법을 찾아보겠음
 # e.g. *.py[cod]?.DS_Store?임

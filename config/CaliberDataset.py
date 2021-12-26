@@ -3,12 +3,11 @@ import json
 import torch
 import cv2 as cv
 import numpy as np
-from torch.utils import data
 
 if (__name__ == '__main__') or (__name__ == 'config.CaliberDataset'):
     import os
     print(__name__)
-    from torch.utils.data import Dataset6
+    from torch.utils.data import Dataset
     def instanceMask(mask, segmentation):
         mask = mask.copy()
         pts = np.array(segmentation, dtype = np.uint8).reshape(-1, 2)
@@ -19,7 +18,7 @@ if (__name__ == '__main__') or (__name__ == 'config.CaliberDataset'):
 
 
     class CustomDataset(Dataset):
-        def __init__(self, root, transforms = None, target_transforms = None, mode = 'train'):
+        def __init__(self, root = 'C:/Users/82108/Desktop/Sample_data', transforms = None, target_transforms = None, mode = 'train'):
             self.root = root
             self.transforms = transforms
             self.target_transforms = target_transforms
@@ -64,7 +63,7 @@ if (__name__ == '__main__') or (__name__ == 'config.CaliberDataset'):
 
         def baseInfos(self):
             baseinfos = {"label" : [], "metainfo_id" : [], "feature" : [], "image_path" : [], "annot_path": []}
-            if self.mode == "val":
+            if self.mode == "train":
                 bpath = os.path.join(self.root, "train")
             else:
                 bpath = os.path.join(self.root, self.mode)
@@ -143,7 +142,7 @@ if (__name__ == '__main__') or (__name__ == 'config.CaliberDataset'):
                     pts = np.array(annot['annotations'][i]['segmentation'], dtype = np.uint8).reshape(-1, 2)    # (num_of_points,2)
                     # org:[C, H, W] >> [H, W, C] >> [N+1, H, W, C] >> [N, H, W]
                     pts = np.stack([pts, pts, pts]).astype(int) # (C, num_of_points. 2)
-                    cv.fillPoly(masks, pts, (255, 255, 255))    # (H, W, C)
+                    cv.fillPoly(masks, pts, i+1)    # (H, W, C)
 
                     instance = cv.cvtColor(mask, cv.COLOR_RGB2GRAY) # (W, H):instance mase
 
@@ -191,5 +190,5 @@ if (__name__ == '__main__') or (__name__ == 'config.CaliberDataset'):
         def __len__(self):
             return len(self.imgs)
 
-    dataset = CustomDataset(root=os.getcwd()), mode='train')
+    dataset = CustomDataset(root=os.getcwd(), mode='train')
     print(dataset.__len__())

@@ -1,13 +1,15 @@
 import os
 import torch
+from torch._C import device
 import torch.nn as nn
 from torch.vision.reference.detection.engine import train_one_epoch, evaluate
 from config.detection.pretrained import get_finetuned_model
 from config.detection.backbone import add_different_backbone
 from config.detection.detector import resnet50_fpn
+from PIL import Image
 
 class CaliberM(nn.Module):
-    def __init__(self, device=device, extension='pt', num_classes=2, option=None):
+    def __init__(self, device=device, extension='pt', num_classes=NUM_CLASSES, option=None, dataset = None, num_epochs = 5):
         super().__init__()
         self.pretrained_path = os.path.join(os.getcwd(), f"assets/taco/model.{extension}")
         self.device = device
@@ -19,11 +21,14 @@ class CaliberM(nn.Module):
         else:   # inference
             self.model = self.get_model()
             self.model = self.Inference()
+            
+        self.dataset = dataset
+        self.num_epochs = num_epochs
         
         
     def get_model(self):
         if self.extension=='pt':
-            pre_path = '/home/agc2021/assets/fasterrcnn_resnet50_fpn_coco.pth'
+            pre_path = 'assets/weights/maskrcnn_resnet50_fpn_coco.pth'
             model = get_finetuned_model(num_classes=self.num_classes, pre_path=pre_path, weight_path=self.pretrained_path)
             model.load_state_dict(torch.load(self.pretrained_path), strict=False, map_location=self.device)
         else:
@@ -36,7 +41,7 @@ class CaliberM(nn.Module):
         optimizer, lr_scheduler = self.Optim()
         model.train()
         for epoch in range(self.num_epochs):
-            train_one_epoch(model, optimizer, dataset, device=self.device, epoch, print_freq=10)
+            train_one_epoch(model, optimizer, self.dataset,self.device, epoch, print_freq=10)
             lr_scheduler.step()
             evaluate(model, dataset, device=self.device)
         return model

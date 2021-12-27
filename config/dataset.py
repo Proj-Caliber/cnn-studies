@@ -10,183 +10,150 @@ from glob import glob
 from tqdm import tqdm
 from torch.utils.data import Dataset
 
+
+## 이 부분은 어떻게 사용하는 부분인가?
 __all__ = [
     "CustomDataset",
     "instanceMask",
     eval
 ]
 
+# 그런데 이 부분이 폐플라스틱 객체검출 데이터에 관해서 작성했지만 오픈소스로는 부족하다고 생각이 된다.
+# 그래서 이 부분은 어떻게 진행할지 얘기해 봐야겠다.
 if (__name__ == '__main__') or (__name__ == 'config.dataset'):
     class CustomDataset(Dataset):
-        def __init__(self, root, transforms = None, target_transforms = None, mode = 'train'):
+        def __init__(self, root, transforms = None):
             self.root = root
             self.transforms = transforms
-            self.target_transforms = target_transforms
-            self.mode = mode.lower()
-            self.infos = self.baseInfos()
-            self.imgs, self.annots = self.infos['image_path'], self.infos['annot_path']
-            self.masks = None
-
-        def __getitem__(self, idx=None):
-            '''return tuple(image, target)'''
-            image_path = self.imgs[idx]
-            # # mask 생성 함수보고 고쳐야 할 듯
-            image = cv.imread(image_path)
-            image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
-            # C, H, W ==  [H, W, C] >> [N+1, H, W, C] >> [N, H, W]
-            mask = np.zeros(image.shape, dtype=np.uint8)    
-            # # masks = np.zeros(mask_shape, dtype = np.uint8)  
-            image = Image.fromarray(image)  # cv to PIL
+            mode = self.root.split('/')[-1]
+            self.mode = mode
             
-            annot_path = self.annots[idx]
-            if self.mode != "test":
-                target = self.json2annots(annot_path, idx)
-            elif self.mode == "train":
-                # # train인 경우에만 target['masks'] 처리할 함수가 들어가야 함.
-                mask, target = self.json2annots(annot_path, idx, mask=mask)
-            # target : dict
-
-            if self.transforms is not None:
-                try:
-                    data = self.transforms(img, target)
-                    return data
-                except:
-                    if self.transforms is not None:
-                        img = self.transforms(img)
-                    elif self.target_transforms is not None:
-                        target = self.target_transforms(target)
-                    return img, target
-            else:
-                # target_transform만 따로 들어오는 경우는 고려하지 않았음.
-                img = self.preprocess(image)
-                return img, target
-
-        def baseInfos(self):
-            baseinfos = {"label" : [], "metainfo_id" : [], "feature" : [], "image_path" : [], "annot_path": []}
-            if self.mode == "train":
-                bpath = os.path.join(self.root, "train")
-            else:
-                bpath = os.path.join(self.root, self.mode)
-            bdirs = sorted(os.listdir(bpath))   # image, annotation(s)
+            ## image 관련
+            PP = list(sorted(os.listdir(os.path.join(root, 'image', 'PP'))))
+            PET = list(sorted(os.listdir(os.path.join(root, 'image', 'PET'))))
+            PS = list(sorted(os.listdir(os.path.join(root, 'image', 'PS'))))
+            PE = list(sorted(os.listdir(os.path.join(root, 'image', 'PE'))))
             
-            for bdir in tqdm(bdirs):
-                for dirs in sorted(os.listdir(os.path.join(bpath, bdir))):
-                    dpath = os.path.join(bpath, bdir, dirs)
+            image = [PP, PET, PS, PE]
+            image = [i for i in image]
+            
+            self.image = image
+            
+            ## annotation 관련
+            if self.mode == 'train':
+                PP_annot = list(sorted(os.listdir(os.path.join(root, 'annotation', 'PP'))))
+                PET_annot = list(sorted(os.listdir(os.path.join(root, 'annotation', 'PET'))))
+                PS_annot = list(sorted(os.listdir(os.path.join(root, 'annotation', 'PS'))))
+                PE_annot = list(sorted(os.listdir(os.path.join(root, 'annotation', 'PE'))))
+            else:
+                PP_annot = list(sorted(os.listdir(os.path.join(root, 'annotations', 'PP'))))
+                PET_annot = list(sorted(os.listdir(os.path.join(root, 'annotations', 'PET'))))
+                PS_annot = list(sorted(os.listdir(os.path.join(root, 'annotations', 'PS'))))
+                PE_annot = list(sorted(os.listdir(os.path.join(root, 'annotations', 'PE'))))
+                
+            annot = [PP_annot, PET_annot, PS_annot, PE_annot]
+            annot = [i for i in annot]
+            
+            self.annot = annot
+            self.categories = {1:'pet', 2:'ps', 3:'pp', 4:'pe'}                
+            
+        def __getitem__(self, idx):
+            if self.mode == 'train':
+                img_path = self.image[idx]
+                annot_path = self.annot[idx]
+                
+                with open(annot_path, 'r') as f:
+                    annot = json.loads(f.read())
+                
+                image_id = int(annot_path.split('/')[-1].split('_')[1])
+                
+                img = Image.open(img_path).convert('RGB')
+                
+                x = annot['images'][0]['width']
+                y = annot['images'][0]['height']
+                
+                annot = annot['annotations']
+                
+                mask = []
+                boxes = []
+                labels = []
+                iscrowd = []
+                area = []
+                masked_image = np.zeros((x, y), dtype = np.uint8)
+                
+                for i in range(len(annot)):
+                    segmentation = annot[i]['segmentation'][0]
+                    areas = annot[i]['area']
+                    iscrowds = annot[i]['iscrowd']
+                    xmin, ymin, width, height = annot[i]['bbox'][0], annot[i]['bbox'][1], annot[i]['bbox'][2], annot[i]['bbox'][3]
+                    xmax = xmin + width
+                    ymax = ymin + height
                     
-                    if bdir.lower()=='image':
-                        paths = sorted(glob(dpath + "/*.jpg"))
-                        baseinfos['image_path'].extend(paths)
-                        fnames = [os.path.basename(fname) for fname in paths]
-                        labels = list(map(lambda x: (x.split('_')[0]), fnames))
-                        baseinfos['label'].extend(labels)
-                        metaIds = list(map(lambda x: int(x.split('_')[1]), fnames))
-                        baseinfos['metainfo_id'].extend(metaIds)
-                        feats = list(map(lambda x: int(x.split('_')[-1][:-4]), fnames))
-                        baseinfos['feature'].extend(feats)
-                    else:
-                        paths = sorted(glob(dpath + "/*.json"))
-                        baseinfos['annot_path'].extend(paths)
-            return baseinfos
+                    label = annot[i]['category_id']
+                    
+                    all_points_x = []
+                    all_points_y = []
+                    
+                    for j in range(len(segmentation)):
+                        if j%2 == 0:
+                            all_points_x.append(segmentation[j])
+                        else:
+                            all_points_y.append(segmentation[j])
+                            
+                    polygon_xy = np.array([(x, y) for (x,y) in zip(all_points_x, all_points_y)])
+                    
+                    cv.fillpoly(masked_image, np.uint([polygon_xy]), i+1)
+                    
+                    boxes.append([xmin, ymin, xmax, ymax])
+                    labels.append(label)
+                    area.append(areas)
+                    iscrowd.append(iscrowds)
+                    
+                mask = np.array(masked_image)
+                obj_ids = np.unique(mask)
+                obj_ids = obj_ids[1:]
+                masks = mask == obj_ids[:,None, None]
+                num_objs = len(obj_ids)
+                
+                boxes = torch.as_tensor(boxes, dtype = torch.float32)
+                labels = torch.ones((num_objs,), dtype = torch.int64)
+                mask = torch.as_tensor(masks, dtype = torch.uint8)
+                image_id = torch.tensor([image_id])
+                area = torch.as_tensor(area, dtype = torch.float32)
+                iscrowd = torch.as_tensor(iscrowd, dtype = torch.int32)
 
-        def preprocess(self, img):
-            image = img
-            import torchvision.transforms as T
-            m, s = np.mean(image, axis = (0, 1)), np.std(image, axis = (0, 1))        
-            transform = T.Compose([
-                                T.ToTensor(),
-                                T.Normalize(mean = m, std = s),
-            ])
-            image = transform(image)
-            
-            return image
-        
-        def json2annots(self, annot_path, idx, mask=None):
-            # try:
-            with open(annot_path, 'r') as f:
-                annot = json.loads(f.read())
+                target = {}
+                target['boxes'] = boxes
+                target['labels'] = labels
+                target['masks'] = mask
+                target['image_id'] = image_id
+                target['area'] = area
+                target['iscrowd'] = iscrowd
 
-            n_objects = len(annot['annotations'])
-            W, H = int(annot['images'][0]['width']), int(annot['images'][0]['height'])
+                img = self.preprocess(img)
+
+                return img, target
             
             if self.mode == 'test':
-                target = {}
-                try:
-                    target['image_id'] = torch.stack([torch.tensor([idx]) for i in range(n_objects)], dtype = torch.int64)
-                except:
-                    target['image_id'] = torch.tensor([idx], dtype=torch.int)
-                return target
-            # return (n_objects, W, H), target
-
-            else:
-                target = {"boxes" : [], "labels" : [], "masks" : [], "image_id" : [], "area" : [], "iscrowd" : []}
-
-                # bbox ground bbox
-                gxmin, gymin, gxmax, gymax = 0, 0, 0, 0
-                for i in range(n_objects):
-                    bbox = annot['annotations'][i]['bbox']
-                    xmin, ymin, width, height = bbox[0],bbox[1],bbox[2],bbox[3]
-                    xmax, ymax = xmin + width, ymin + height
-                    target['boxes'].append([xmin, ymin, xmax, ymax])
-
-                    label = annot['annotations'][i]['category_id']
-                    target['labels'].append([label])
-
-                    masks = mask.copy() # (H, W, C)
-                    pts = np.array(annot['annotations'][i]['segmentation'], dtype = np.uint8).reshape(-1, 2)    # (num_of_points,2)
-                    # org:[C, H, W] >> [H, W, C] >> [N+1, H, W, C] >> [N, H, W]
-                    pts = np.stack([pts, pts, pts]).astype(int) # (C, num_of_points. 2)
-                    cv.fillPoly(masks, pts, (255, 255, 255))    # (H, W, C)
-
-                    instance = cv.cvtColor(mask, cv.COLOR_RGB2GRAY) # (W, H):instance mase
-
-                    target['masks'].append(instance)
-
-                    area = torch.tensor(annot['annotations'][i]['area'], dtype = torch.float32)
-                    target['area'].append([area])
-
-                    iscrowd = torch.tensor(annot['annotations'][i]['iscrowd'], dtype = torch.int64)
-                    target['iscrowd'].append([iscrowd])
-
-                ########################################################## instance id, 필요 시 주석해제 ##########################################################    
-                # segmentation에 DataLoader 내에서 어떻게 선언되어 있는지 확인해야 함
-                # target['id'] = torch.stack([torch.tensor([i+1]) for i in range(n_objects)]) # shape : (3, 1)
-                # ValueError: Expected target boxes to be a tensorof shape [N, 4], got torch.Size([1, 3, 4]).
-                ########################################################## type은 맞으나, shape이 맞는지 확신이 없는 부분 ##########################################################
-                # torch.Size([3, 2048, 2048])
-                # target['boxes'] = torch.as_tensor(target['boxes'], dtype = torch.float32)   
-                # shape : (3, 4)
-                target['boxes'] = torch.stack([torch.tensor(bbox, dtype = torch.float32) for bbox in target['boxes']])
-
-                # shape : torch.Size([1, 3, 1])
-                target['labels'] = torch.as_tensor((target['labels'], ), dtype = torch.int64).squeeze()
+                img_path = self.image[idx]
+                annot_path = self.annot[idx]
                 
-                # shape : torch.Size([1, 4, 2048, 2048])
-                # target['masks'] = torch.as_tensor(target['masks'], dtype = torch.uint8) # (2, H, W) : (C, H, W) >> detection?
-                target['masks'] = torch.stack([torch.tensor(mask, dtype = torch.uint8) for mask in target['masks']])  # [3, 2048, 2048] : (num_of_instance, H, W) >> segmentation?
-                # mssk 처리 전, 공간 할당
+                with open(annot_path, 'r') as f:
+                    annot = json.loads(f.read())
+                    
+                annot = annot['annotations']
 
-                ########################################################## below ~~ torch.Size([3, 1]) : 각각의 shape도 type도 맞는 것 같음 ##########################################################
-                # image_path[index] -> 이미지 자체의 아이디
-                target['image_id'] = torch.stack([torch.tensor([idx]) for i in range(n_objects)])   # shape : (3, 1)
-                target['area'] = torch.as_tensor(target['area'], dtype = torch.float32) # shape : (1, 3) >> (3, 1)
-                target['iscrowd'] = torch.as_tensor(target['iscrowd'], dtype = torch.int64)
-                # target['ignore'] = torch.as_tensor(target['ignore'], dtype = torch.int64)
-                return target['masks'], target
-            # except:
-            #     print(idx)
-            #     pass
-
-        def _labels2category(self, label):
-            category = {1 : "PET", 2 : "PS", 3 : "PP", 4 : "PE"}
-            return category(label)
-
-        def __len__(self):
-            return len(self.imgs)
-
-    def instanceMask(mask, segmentation):
-        mask = mask.copy()
-        pts = np.array(segmentation, dtype = np.uint8).reshape(-1, 2)
-
-        pts = np.stack([pts, pts, pts])
-        cv.fillPoly(mask, pts, color=(255, 255, 255))
-        return mask
+                target = {}
+                
+                img = Image.open(img_path).convert('RGB')
+                
+                image_id = int(annot_path.split('/')[-1].split('_')[1])
+                
+                try:
+                    target['image_id'] = torch.stack([torch.tensor([idx]) for i in range(len(annot))], dtype = torch.int64)
+                except:
+                    target['image_id'] = torch.tensor([idx], dtype = torch.int)
+                    
+                return img, target
+            
+print('done')

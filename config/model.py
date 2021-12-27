@@ -3,13 +3,13 @@ import torch
 import torch.nn as nn
 if __name__ == "__main__":
     # engine부분을 어떻게 넣을 것인가?
-    from config.engine import train_one_epoch, evaluate
+    from torch.vision.references.detection.engine import train_one_epoch, evaluate
     from config.detection.pretrained import get_finetuned_model
     from config.detection.backbone import add_different_backbone
     from config.detection.detector import resnet50_fpn
 
     class CaliberM(nn.Module):
-        def __init__(self, device=device, extension='pt', num_classes=2, option=None):
+        def __init__(self, device=device, extension='pt', num_classes=NUM_CLASSES, option=None):
             super().__init__()
             self.pretrained_path = os.path.join(os.getcwd(), f"assets/taco/model.{extension}")
             self.device = device
@@ -38,7 +38,7 @@ if __name__ == "__main__":
             optimizer, lr_scheduler = self.Optim()
             model.train()
             for epoch in range(self.num_epochs):
-                train_one_epoch(model, optimizer, dataset, device=self.device, epoch, print_freq=10)
+                train_one_epoch(model, optimizer, dataset, self.device, epoch, print_freq=10)
                 lr_scheduler.step()
                 evaluate(model, dataset, device=self.device)
             return model

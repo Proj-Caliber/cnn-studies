@@ -3,6 +3,7 @@ import json
 import torch
 import cv2 as cv
 import numpy as np
+from PIL import Image
 
 if (__name__ == '__main__') or (__name__ == 'config.CaliberDataset'):
     import os

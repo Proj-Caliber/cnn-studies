@@ -36,9 +36,11 @@ if __name__ == "__main__":
         test_dataset = CustomDataset(root = os.path.join(os.environ["WORKSPACE"], 'assets/data/inference'), mode = args.mode)
     else:   # train(data >> train, validation, test)
         # {base_dir}/train
-        dataset = CustomDataset(root = os.path.join(os.environ["WORKSPACE"], 'assets/data/train'), mode = args.mode)
+        # dataset = CustomDataset(root = os.path.join(os.environ["WORKSPACE"], 'assets/data/train'), mode = args.mode)  # local
+        dataset = CustomDataset(root = '/content/drive/MyDrive/Task/plastic-segmentation/Data/train', mode = args.mode) # gdrive
         # {base_dir}/test
-        test_dataset = CustomDataset(root = os.path.join(os.environ["WORKSPACE"], 'assets/data/test'), mode = args.mode)
+        # test_dataset = CustomDataset(root = os.path.join(os.environ["WORKSPACE"], 'assets/data/test'), mode = args.mode)  # local
+        test_dataset = CustomDataset(root = '/content/drive/MyDrive/Task/plastic-segmentation/Data/test', mode = args.mode) # gdrive
         
         torch.manual_seed(777)
         indices = torch.randperm(len(dataset)).tolist()

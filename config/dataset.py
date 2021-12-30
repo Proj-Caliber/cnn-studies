@@ -22,17 +22,18 @@ __all__ = [
 # 그래서 이 부분은 어떻게 진행할지 얘기해 봐야겠다.
 if (__name__ == '__main__') or (__name__ == 'config.dataset'):
     class CustomDataset(Dataset):
-        def __init__(self, root, transforms = None):
+        def __init__(self, root, transforms = None, mode = 'train'):
             self.root = root
             self.transforms = transforms
-            mode = self.root.split('/')[-1]
             self.mode = mode
+            # mode = self.root.split('/')[-1]
+            # self.mode = mode
             
             ## image 관련
-            PP = list(sorted(os.listdir(os.path.join(root, 'image', 'PP'))))
-            PET = list(sorted(os.listdir(os.path.join(root, 'image', 'PET'))))
-            PS = list(sorted(os.listdir(os.path.join(root, 'image', 'PS'))))
-            PE = list(sorted(os.listdir(os.path.join(root, 'image', 'PE'))))
+            PP = list(sorted(os.listdir(os.path.join(root, mode,'image' ,'PP'))))
+            PET = list(sorted(os.listdir(os.path.join(root, mode,'image' , 'PET'))))
+            PS = list(sorted(os.listdir(os.path.join(root, mode,'image' , 'PS'))))
+            PE = list(sorted(os.listdir(os.path.join(root, mode,'image' ,'PE'))))
             
             image = [PP, PET, PS, PE]
             image = [i for i in image]
@@ -41,15 +42,15 @@ if (__name__ == '__main__') or (__name__ == 'config.dataset'):
             
             ## annotation 관련
             if self.mode == 'train':
-                PP_annot = list(sorted(os.listdir(os.path.join(root, 'annotation', 'PP'))))
-                PET_annot = list(sorted(os.listdir(os.path.join(root, 'annotation', 'PET'))))
-                PS_annot = list(sorted(os.listdir(os.path.join(root, 'annotation', 'PS'))))
-                PE_annot = list(sorted(os.listdir(os.path.join(root, 'annotation', 'PE'))))
+                PP_annot = list(sorted(os.listdir(os.path.join(root,mode, 'annotation', 'PP'))))
+                PET_annot = list(sorted(os.listdir(os.path.join(root,mode, 'annotation', 'PET'))))
+                PS_annot = list(sorted(os.listdir(os.path.join(root,mode, 'annotation', 'PS'))))
+                PE_annot = list(sorted(os.listdir(os.path.join(root,mode, 'annotation', 'PE'))))
             else:
-                PP_annot = list(sorted(os.listdir(os.path.join(root, 'annotations', 'PP'))))
-                PET_annot = list(sorted(os.listdir(os.path.join(root, 'annotations', 'PET'))))
-                PS_annot = list(sorted(os.listdir(os.path.join(root, 'annotations', 'PS'))))
-                PE_annot = list(sorted(os.listdir(os.path.join(root, 'annotations', 'PE'))))
+                PP_annot = list(sorted(os.listdir(os.path.join(root,mode, 'annotations', 'PP'))))
+                PET_annot = list(sorted(os.listdir(os.path.join(root,mode, 'annotations', 'PET'))))
+                PS_annot = list(sorted(os.listdir(os.path.join(root,mode, 'annotations', 'PS'))))
+                PE_annot = list(sorted(os.listdir(os.path.join(root,mode, 'annotations', 'PE'))))
                 
             annot = [PP_annot, PET_annot, PS_annot, PE_annot]
             annot = [i for i in annot]
@@ -155,5 +156,9 @@ if (__name__ == '__main__') or (__name__ == 'config.dataset'):
                     target['image_id'] = torch.tensor([idx], dtype = torch.int)
                     
                 return img, target
+            
+        def __len__(self):
+            return len(self.image)
+    
             
 print('done')

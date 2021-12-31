@@ -1,6 +1,6 @@
-MOMENTUM = os.environ(['MOMENTUM'])
-LEARNING_RATE = os.environ(['LEARNING_RATE'])
-WEIGHT_DECAY = os.environ(['WEIGHT_DECAY'])
+import torch
+
+
 
 if (__name__ == '__main__') or (__name__ == 'config.train'):
     params = [p for p in model.parameters() if p.requires_grad]

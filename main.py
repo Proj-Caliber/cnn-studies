@@ -4,11 +4,26 @@ import cv2 as cv
 from glob import glob
 from tqdm import tqdm
 import torch
-'''
-vision부분과 engine부분을 어떻게 진행해야 할까?
-'''
+import argparse
 
-PATH = 'C:\\Users\\82108\\Desktop\\Sample_data'
+def get_arg_parser():
+    parser = argparse.ArgumentParser(
+        'Prepare instance segmentation task with Mask R-CNN'
+    )
+    parser.add_argument('--PATH', help = 'Where is the data?')
+    parser.add_argument('--output_dir',
+                        help = 'path to save model',
+                        default = '../',
+                        type = 'str')
+    
+    # default가 4개인 이유는 대회에서 4개였기 때문에 나중에 수정해도 무방
+    parser.add_argument('--NUM_CLASSES', default = 4, type = 'int')
+    
+    # default가 5인 이유는 일단 확인해보고 나중에 더 추가하도록 유도하기 위해서
+    parser.add_argument('--NUM_EPOCH', default = 5, type = int)
+    
+    parser.add_argument('--BATCH_SIZE', default = 28, type = int)
+    return parser
 
 if __name__ == '__main__':
     from typing import Any, Callable, cast, Dict, List, Optional, Tuple
@@ -20,6 +35,7 @@ if __name__ == '__main__':
 
     # from config.TVS.detection import transforms as transforms
     from config.dataset import CustomDataset
+    from config.model import CaliberM
     print("done!")
 
     # from config.detection import 
@@ -27,11 +43,17 @@ if __name__ == '__main__':
     # ROOT = os.getcwd()
     # PATH = os.path.join(ROOT, "Data")
 
-    BATCH_SIZE = 1
-    NUM_EPOCHS = 5
     MOMENTUM = 0.9
     LEARNING_RATE = 0.001
     WEIGHT_DECAY = 0.0005
+    
+    parser = get_arg_parser()
+    args = parser.parse_args
+    
+    num_clesses = args.NUM_CLASSES
+    num_epoch = args.NUM_EPOCH
+    batch_size = args.BATCH_SIZE
+    PATH = args.PATH
     
     # use our dataset and defined transformations
     train_dataset = CustomDataset(root=PATH)
@@ -53,9 +75,9 @@ if __name__ == '__main__':
     from torch.utils.data import DataLoader
     # define training and validation data loaders
 
-    dl_train = torch.utils.data.DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True, collate_fn=utils.collate_fn)
+    dl_train = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, collate_fn=utils.collate_fn)
     # dl_val = torch.utils.data.DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True, collate_fn=utils.collate_fn)
-    dl_test = torch.utils.data.DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True, collate_fn=utils.collate_fn)
+    dl_test = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, collate_fn=utils.collate_fn)
     
     
     # train 시

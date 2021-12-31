@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 if __name__ == "__main__":
     # engine부분을 어떻게 넣을 것인가?
-    from torch.vision.references.detection.engine import train_one_epoch, evaluate
+    from vision.references.detection.engine import train_one_epoch, evaluate
     from config.detection.pretrained import get_finetuned_model
     from config.detection.backbone import add_different_backbone
     from config.detection.detector import resnet50_fpn
@@ -29,7 +29,7 @@ if __name__ == "__main__":
                 model = get_finetuned_model(num_classes=self.num_classes, pre_path=pre_path, weight_path=self.pretrained_path)
                 model.load_state_dict(torch.load(self.pretrained_path), strict=False, map_location=self.device)
             else:
-                model = resnet50_fpn(device=self.device, num_classes=self.num_classes)
+                model = presnet50_fpn(device=self.device, num_classes=self.num_classes)
             return model
                 
         def Train(self):

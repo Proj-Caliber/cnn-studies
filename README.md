@@ -1,5 +1,6 @@
 # Waste Recycling Image Segmentation
 
+정리 : https://www.notion.so/Calier-Team-da6c4805228345bc9bc52f17236e7a57
 
 ## 🥼 자율연구 - CNN(Plastic Segmentation)
 
